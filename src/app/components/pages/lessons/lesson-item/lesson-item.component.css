@@ -1,0 +1,22 @@
+.lesson__block {
+
+}
+
+.lesson__block {
+  margin: 8px 0;
+}
+
+.upper__pie {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom__pie {
+  display: flex;
+  justify-content: flex-end;
+  margin: 4px;
+}
+
+.successful__button {
+  margin-right: 4px;
+}

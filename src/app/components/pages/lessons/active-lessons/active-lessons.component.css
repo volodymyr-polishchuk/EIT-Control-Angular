@@ -1,0 +1,12 @@
+* {
+  box-sizing: border-box;
+  padding-bottom: 4px;
+}
+
+.main__container {
+  min-width: 250px;
+  margin: 4px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 8px);
+}
