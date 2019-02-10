@@ -1,0 +1,31 @@
+.result__item__wrapper {
+  margin: 8px 0;
+}
+
+.result__mini__text {
+  font-size: 0.8em;
+}
+
+.result__item__timer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.result__item__left {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.result__item__main {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px;
+}
+
+.bottom__pie {
+  display: flex;
+  justify-content: flex-end;
+}

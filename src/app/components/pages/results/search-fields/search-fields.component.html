@@ -1,0 +1,27 @@
+<mat-card class="card" style="display: flex; flex-direction: column">
+  <h2>Пошук</h2>
+  <mat-form-field>
+    <mat-label>Предмет</mat-label>
+    <select matNativeControl>
+      <option>Англійська мова</option>
+      <option>Географія</option>
+      <option>Історія</option>
+      <option>Українська мова</option>
+    </select>
+  </mat-form-field>
+
+  <mat-checkbox style="padding-bottom: 20px">Групувати</mat-checkbox>
+
+  <mat-form-field>
+    <mat-label>З дати:</mat-label>
+    <input matNativeControl type="date">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>По дату:</mat-label>
+    <input matNativeControl type="date">
+  </mat-form-field>
+
+  <button mat-raised-button color="accent">Пошук</button>
+
+</mat-card>

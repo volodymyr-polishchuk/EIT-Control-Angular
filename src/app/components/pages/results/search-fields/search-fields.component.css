@@ -1,0 +1,9 @@
+.main__wrapper {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+}
+
+h2 {
+  margin-top: 0;
+}

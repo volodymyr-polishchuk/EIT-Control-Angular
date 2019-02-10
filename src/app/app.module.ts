@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import {
   MatButtonModule,
   MatCardModule,
+  MatCheckboxModule,
   MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
@@ -21,6 +22,9 @@ import { LessonsComponent } from './components/pages/lessons/lessons.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ResultsComponent } from './components/pages/results/results.component';
 import { SettingsComponent } from './components/pages/settings/settings.component';
+import { SearchFieldsComponent } from './components/pages/results/search-fields/search-fields.component';
+import { SearchResultsComponent } from './components/pages/results/search-results/search-results.component';
+import { ResultItemComponent } from './components/pages/results/search-results/result-item/result-item.component';
 
 
 @NgModule({
@@ -33,7 +37,10 @@ import { SettingsComponent } from './components/pages/settings/settings.componen
     HintComponent,
     LessonsComponent,
     ResultsComponent,
-    SettingsComponent
+    SettingsComponent,
+    SearchFieldsComponent,
+    SearchResultsComponent,
+    ResultItemComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +52,8 @@ import { SettingsComponent } from './components/pages/settings/settings.componen
     MatInputModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
