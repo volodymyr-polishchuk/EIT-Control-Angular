@@ -9,8 +9,8 @@ import { environment } from '../../../../environments/environment';
 export class DataSourceService {
 
   constructor(private http: HttpClient) {
-    this.http.post(`${environment.BASE_URL}/api/login.php`, {login: 'volodymyr', password: 'admin'})
-      .subscribe(() => {}, error => console.log(error));
+    // this.http.post(`${environment.BASE_URL}/api/login.php`, {login: 'volodymyr', password: 'admin'})
+    //   .subscribe(() => {}, error => console.log(error));
   }
 
   getAllSubject(): Observable<Object> {

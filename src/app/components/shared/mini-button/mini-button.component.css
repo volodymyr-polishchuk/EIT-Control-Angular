@@ -1,0 +1,21 @@
+.mini__button {
+  border: 1px solid silver;
+  font-size: .9em;
+  padding: 4px 8px;
+  margin: 2px;
+  color: deepskyblue;
+  border-radius: 4px;
+  display: inline-block;
+  transition: 0.2s;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mini__button:hover {
+  background-color: deepskyblue;
+  color: black;
+}
+
+.mini__button:active {
+  background-color: #0079a8;
+}

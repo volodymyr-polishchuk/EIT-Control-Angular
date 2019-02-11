@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {
+  MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
-  MatCheckboxModule,
+  MatCheckboxModule, MatDialogModule,
   MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatSelectModule
+  MatSelectModule, MatSnackBarModule
 } from '@angular/material';
 import { NavBarComponent } from './components/shared/nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,6 +27,7 @@ import { SearchFieldsComponent } from './components/pages/results/search-fields/
 import { SearchResultsComponent } from './components/pages/results/search-results/search-results.component';
 import { ResultItemComponent } from './components/pages/results/search-results/result-item/result-item.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MiniButtonComponent } from './components/shared/mini-button/mini-button.component';
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
     StatisticsComponent,
     SearchFieldsComponent,
     SearchResultsComponent,
-    ResultItemComponent
+    ResultItemComponent,
+    MiniButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     AppRoutingModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    MatAutocompleteModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Lesson } from '../../../shared/models/lesson';
 
 @Component({
   selector: 'app-active-lessons',
   templateUrl: './active-lessons.component.html',
   styleUrls: ['./active-lessons.component.css']
 })
-export class ActiveLessonsComponent implements OnInit {
+export class ActiveLessonsComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  @Input() lessons: Array<Lesson> = [];
+  @Output() successfulLesson = new EventEmitter<Lesson>();
+  @Output() deleteLesson = new EventEmitter<Lesson>();
 
 }

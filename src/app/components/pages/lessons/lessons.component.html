@@ -1,9 +1,23 @@
 <div class="main__wrapper">
   <div class="main__container">
-    <app-create-lesson style="flex: 3" class="card"></app-create-lesson>
+    <app-create-lesson
+      style="flex: 3"
+      class="card"
+      (onCreateLesson)="createLesson($event)">
+    </app-create-lesson>
 
-    <app-active-lessons style="flex: 5" class="card"></app-active-lessons>
+    <app-active-lessons
+      style="flex: 5"
+      class="card"
+      [lessons]="lessons"
+      (successfulLesson)="successfulLesson($event)"
+      (deleteLesson)="deleteLesson($event)">
+    </app-active-lessons>
 
-    <app-hint style="flex: 3; flex-basis: 400px" class="card"></app-hint>
+    <app-hint
+      style="flex: 3; flex-basis: 400px"
+      class="card"
+      [subjects]="subjectsForHint">
+    </app-hint>
   </div>
 </div>

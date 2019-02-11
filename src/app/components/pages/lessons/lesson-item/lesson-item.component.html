@@ -3,18 +3,29 @@
   <br>
   <div class="upper__pie">
     <div class="left__pie">
-      Географія<br>
-      Тема заняття
+      {{ lesson.name }}<br>
+      {{ lesson.topic.name }}
     </div>
     <div>
-      00:00
+      {{ timeLine }}
     </div>
   </div>
 
   <div class="bottom__pie">
     <div>
-      <button mat-stroked-button color="accent" class="successful__button">Завершити</button>
-      <button mat-stroked-button color="warn">Видалити</button>
+      <button
+        mat-stroked-button
+        color="accent"
+        class="successful__button"
+        (click)="successfulLesson()">
+        Завершити
+      </button>
+      <button
+        mat-stroked-button
+        color="warn"
+        (click)="deleteLesson()">
+        Видалити
+      </button>
     </div>
   </div>
 </div>

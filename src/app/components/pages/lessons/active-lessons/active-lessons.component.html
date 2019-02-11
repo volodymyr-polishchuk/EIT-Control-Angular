@@ -1,7 +1,18 @@
 <mat-card class="main__container">
   <mat-card-title>Активні заняття</mat-card-title>
   <mat-card-content>
-    <app-lesson-item></app-lesson-item>
-    <app-lesson-item></app-lesson-item>
+    <div *ngIf="lessons.length > 0; else nothing_here">
+      <app-lesson-item
+        *ngFor="let lesson of lessons"
+        [lesson]="lesson"
+        (successful)="successfulLesson.emit($event)"
+        (delete)="deleteLesson.emit($event)">
+      </app-lesson-item>
+    </div>
+    <ng-template #nothing_here>
+      <div>
+        <span style="font-size: .8em">Жодного активного заняття не існує. Щоб створити оберіть предмет та введіть тему. Потім натисність кнопку "Розпочати"</span>
+      </div>
+    </ng-template>
   </mat-card-content>
 </mat-card>

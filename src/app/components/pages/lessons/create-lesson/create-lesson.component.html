@@ -3,21 +3,22 @@
   <mat-card-content style="display: flex; flex-direction: column">
     <mat-form-field>
       <mat-label>Предмет</mat-label>
-      <select matNativeControl required>
-        <option>Англійська мова</option>
-        <option>Географія</option>
-        <option>Історія</option>
-        <option>Українська мова</option>
+      <select matNativeControl required (change)="updateTopicsList($event)" #subject_select>
+        <option *ngFor="let subject of subjects" [value]="subject.key">{{ subject.name }}</option>
       </select>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Тема предмету</mat-label>
-      <input matNativeControl required type="text">
+      <input type="text" placeholder="Тема" aria-label="Number" matInput [matAutocomplete]="auto" #topic_input>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let topic of topics" [value]="topic.name">
+          {{ topic.name }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="accent">Розпочати</button>
+    <button mat-raised-button color="accent" (click)="startLesson(subject_select, topic_input)">Розпочати</button>
   </mat-card-actions>
 </mat-card>

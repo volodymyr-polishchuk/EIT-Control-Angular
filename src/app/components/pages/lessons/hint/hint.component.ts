@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Subject } from '../../../shared/models/subject';
 
 @Component({
   selector: 'app-hint',
   templateUrl: './hint.component.html',
   styleUrls: ['./hint.component.css']
 })
-export class HintComponent implements OnInit {
+export class HintComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  @Input() subjects: Array<Subject> = [];
 
 }

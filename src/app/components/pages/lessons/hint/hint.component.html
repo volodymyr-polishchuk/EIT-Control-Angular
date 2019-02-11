@@ -2,10 +2,7 @@
   <mat-card-content>
     Сьогодні варто вивчити:
     <ul>
-      <li>Англійська мова</li>
-      <li>Географія</li>
-      <li>Історія</li>
-      <li>Українська мова</li>
+      <li *ngFor="let subject of subjects">{{ subject.name }}</li>
     </ul>
   </mat-card-content>
 </mat-card>
