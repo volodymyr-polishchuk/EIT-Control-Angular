@@ -1,19 +1,23 @@
 <mat-card class="main__container">
-  <h2>Створення зайняття</h2>
-  <mat-form-field>
-    <mat-label>Предмет</mat-label>
-    <select matNativeControl required>
-      <option>Англійська мова</option>
-      <option>Географія</option>
-      <option>Історія</option>
-      <option>Українська мова</option>
-    </select>
-  </mat-form-field>
+  <mat-card-title>Створення зайняття</mat-card-title>
+  <mat-card-content style="display: flex; flex-direction: column">
+    <mat-form-field>
+      <mat-label>Предмет</mat-label>
+      <select matNativeControl required>
+        <option>Англійська мова</option>
+        <option>Географія</option>
+        <option>Історія</option>
+        <option>Українська мова</option>
+      </select>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Тема предмету</mat-label>
-    <input matNativeControl required type="text">
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Тема предмету</mat-label>
+      <input matNativeControl required type="text">
+    </mat-form-field>
 
-  <button mat-raised-button color="accent">Розпочати</button>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="accent">Розпочати</button>
+  </mat-card-actions>
 </mat-card>

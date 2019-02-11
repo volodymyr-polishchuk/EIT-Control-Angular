@@ -21,10 +21,11 @@ import { HintComponent } from './components/pages/lessons/hint/hint.component';
 import { LessonsComponent } from './components/pages/lessons/lessons.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ResultsComponent } from './components/pages/results/results.component';
-import { SettingsComponent } from './components/pages/settings/settings.component';
+import { StatisticsComponent } from './components/pages/statistics/statistics.component';
 import { SearchFieldsComponent } from './components/pages/results/search-fields/search-fields.component';
 import { SearchResultsComponent } from './components/pages/results/search-results/search-results.component';
 import { ResultItemComponent } from './components/pages/results/search-results/result-item/result-item.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { ResultItemComponent } from './components/pages/results/search-results/r
     HintComponent,
     LessonsComponent,
     ResultsComponent,
-    SettingsComponent,
+    StatisticsComponent,
     SearchFieldsComponent,
     SearchResultsComponent,
     ResultItemComponent
@@ -53,7 +54,8 @@ import { ResultItemComponent } from './components/pages/results/search-results/r
     MatSelectModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
