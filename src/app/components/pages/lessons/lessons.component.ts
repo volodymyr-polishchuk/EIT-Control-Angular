@@ -18,14 +18,19 @@ export class LessonsComponent implements OnInit {
 
   ngOnInit() {
     this.subjectsForHint = this.memoryDataSource.getAllSubject();
+    this.updateActiveLessonsList();
+  }
+
+  updateActiveLessonsList(): void {
     this.dataSource.getActiveLessons()
       .subscribe((value: Array<{lessonID: string, lessonName: string, themeName: string, timeToNowDiff: string}>) => {
         this.lessons = value.map((it) =>
           ({
             id: it.lessonID,
             name: it.lessonName,
-            topic: {key: '-1', name: it.themeName},
-            timeToNowDifference: Number(it.timeToNowDiff)
+            topic: { key: '-1', name: it.themeName },
+            timeToNowDifference: Number(it.timeToNowDiff),
+            subject: { key: '0', name: it.lessonName }
           })
         );
         this.loadLessons = true;
@@ -33,10 +38,11 @@ export class LessonsComponent implements OnInit {
   }
 
   createLesson(event: Lesson): void {
-    this.dataSource.startLesson({key: '-1', name: event.name}, event.topic)
-      .subscribe(value => console.log(value));
-    console.log(event);
-    this.lessons.push(event);
+    this.dataSource.startLesson(event.subject, event.topic)
+      .subscribe(value => {
+        console.log(value);
+        this.updateActiveLessonsList();
+      });
   }
 
   successfulLesson(lesson: Lesson): void {

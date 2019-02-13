@@ -40,11 +40,13 @@ export class CreateLessonComponent implements OnInit {
     if (!topic) {
       topic = {key: '-1', name: topicInput.value};
     }
+    const subject: Subject = this.subjects.find(value => value.key === subjectSelect[subjectSelect.selectedIndex].value);
     this.onCreateLesson.emit({
       id: '-1',
-      name: this.subjects.find(value => value.key === subjectSelect[subjectSelect.selectedIndex].value).name,
+      name: subject.name,
       topic: topic,
-      timeToNowDifference: new Date().getTime()
+      timeToNowDifference: new Date().getTime(),
+      subject: subject
     });
     this.snackBar.open('Заняття розпочалося', 'Закрити', { duration: 1000 });
   }

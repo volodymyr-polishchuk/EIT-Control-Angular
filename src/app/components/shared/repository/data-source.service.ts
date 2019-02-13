@@ -35,9 +35,12 @@ export class DataSourceService {
   }
 
   startLesson(subject: Subject, topic: Topic): Observable<Object> {
+    const formData: FormData = new FormData();
+    formData.append('subject', subject.key);
+    formData.append('theme', topic.name);
     return this.http.post(
       `${environment.BASE_URL}/start_lesson.php`,
-      { subject: subject.key, theme: topic.name }
+      formData
       );
   }
 
