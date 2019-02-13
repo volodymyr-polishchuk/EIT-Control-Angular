@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASE_URL: 'http://hwork.net/polishchuk/eit'
+  BASE_URL: 'http://eit.hwork.net/api'
 };
 
 /*

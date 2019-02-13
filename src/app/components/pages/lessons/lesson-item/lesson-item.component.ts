@@ -12,19 +12,22 @@ export class LessonItemComponent implements OnInit {
   @Input() lesson: Lesson;
   @Output() successful = new EventEmitter<Lesson>();
   @Output() delete = new EventEmitter<Lesson>();
+  createTimerTime: Date;
   timeLine = '0:00';
   updateTimer: Object;
-  static timeFormat(second) {
+  static timeFormat(second: number) {
     return Math.floor(second / 60) + ':' + ((second % 60) >= 10 ? (second % 60) : ('0' + (second % 60)));
   }
 
   ngOnInit() {
+    this.createTimerTime = new Date();
+    this.updateTimerFn();
     this.updateTimer = setInterval(this.updateTimerFn.bind(this), 1000);
   }
 
   updateTimerFn() {
-    const ms = new Date().getTime() - this.lesson.timeToNowDifference;
-    this.timeLine = LessonItemComponent.timeFormat(Math.floor(ms / 1000));
+    const time = Math.floor((new Date().getTime() - this.createTimerTime.getTime()) / 1000);
+    this.timeLine = LessonItemComponent.timeFormat(this.lesson.timeToNowDifference + time);
   }
 
   successfulLesson() {

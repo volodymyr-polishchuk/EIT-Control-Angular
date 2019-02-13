@@ -26,8 +26,9 @@ import { StatisticsComponent } from './components/pages/statistics/statistics.co
 import { SearchFieldsComponent } from './components/pages/results/search-fields/search-fields.component';
 import { SearchResultsComponent } from './components/pages/results/search-results/search-results.component';
 import { ResultItemComponent } from './components/pages/results/search-results/result-item/result-item.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { MiniButtonComponent } from './components/shared/mini-button/mini-button.component';
+import {JwtInterceptorService} from './components/shared/jwt-interceptor.service';
 
 
 @NgModule({
@@ -62,7 +63,9 @@ import { MiniButtonComponent } from './components/shared/mini-button/mini-button
     MatAutocompleteModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 <mat-card class="main__container">
   <mat-card-title>Активні заняття</mat-card-title>
   <mat-card-content>
-    <div *ngIf="lessons.length > 0; else nothing_here">
+    <div *ngIf="lessons.length > 0 || !loadData; else nothing_here">
       <app-lesson-item
         *ngFor="let lesson of lessons"
         [lesson]="lesson"

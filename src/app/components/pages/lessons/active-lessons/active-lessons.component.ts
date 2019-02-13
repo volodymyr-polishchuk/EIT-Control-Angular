@@ -9,6 +9,7 @@ import { Lesson } from '../../../shared/models/lesson';
 export class ActiveLessonsComponent {
 
   @Input() lessons: Array<Lesson> = [];
+  @Input() loadData: boolean;
   @Output() successfulLesson = new EventEmitter<Lesson>();
   @Output() deleteLesson = new EventEmitter<Lesson>();
 

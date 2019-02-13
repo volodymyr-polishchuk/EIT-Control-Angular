@@ -22,33 +22,37 @@ export class CreateLessonComponent implements OnInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    // this.dataSource.getAllSubject().subscribe(
-    //   (next: Array<{k: string; name: string}>) => {
-    //     this.subjects = next.map((item) => ({key: item.k, name: item.name}));
-    //   }, error => {
-    //     // alert(JSON.stringify(error));
-    //     console.log(error);
-    //   }, () => {
-    //     alert('complete');
-    //   });
-    this.subjects = this.ds.getAllSubject();
-    this.topics = this.ds.getTopicForSubject(this.subjects[0].key);
+    this.dataSource.getAllSubject().subscribe(
+      (next: Array<{k: string; name: string}>) => {
+        this.subjects = next.map((item) => ({key: item.k, name: item.name}));
+        if (this.subjects) {
+          this.refreshTopicsList(this.subjects[0].key);
+        }
+      });
   }
 
   updateTopicsList(event: any): void {
-    this.topics = this.ds.getTopicForSubject(event.target[event.target.selectedIndex].value);
+    this.refreshTopicsList(event.target[event.target.selectedIndex].value);
   }
+
   startLesson(subjectSelect: any, topicInput: HTMLInputElement): void {
     let topic: Topic = this.topics.find(t => t.name === topicInput.value);
     if (!topic) {
-      topic = {key: '0', name: topicInput.value};
+      topic = {key: '-1', name: topicInput.value};
     }
     this.onCreateLesson.emit({
-      id: '',
+      id: '-1',
       name: this.subjects.find(value => value.key === subjectSelect[subjectSelect.selectedIndex].value).name,
       topic: topic,
       timeToNowDifference: new Date().getTime()
     });
     this.snackBar.open('Заняття розпочалося', 'Закрити', { duration: 1000 });
+  }
+
+  refreshTopicsList(key: string): void {
+    this.dataSource.getTopicsForSubject(key)
+      .subscribe((value: Array<{k: string, name: string}>) => {
+        this.topics = value.map((it) => ({key: it.k, name: it.name}));
+      });
   }
 }

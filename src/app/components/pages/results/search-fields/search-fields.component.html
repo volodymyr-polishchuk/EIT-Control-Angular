@@ -25,9 +25,14 @@
     </mat-form-field>
   </mat-card-content>
 
-  <mat-card-actions>
-    <button mat-raised-button color="accent">Пошук</button>
-    <app-mini-button [value]="'Сьогодні'"></app-mini-button>
+  <mat-card-actions style="display: flex; justify-content: space-between; align-items: baseline">
+    <div>
+      <button mat-raised-button color="accent">Пошук</button>
+    </div>
+    <div>
+      <app-mini-button [value]="'Сьогодні'"></app-mini-button>
+      <app-mini-button [value]="'Вчора'"></app-mini-button>
+    </div>
   </mat-card-actions>
 
 </mat-card>
