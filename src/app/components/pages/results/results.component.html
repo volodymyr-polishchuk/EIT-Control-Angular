@@ -1,7 +1,14 @@
 <div class="main__wrapper">
   <div class="main__container">
-    <app-search-fields style="flex: 3;" class="card"></app-search-fields>
-    <app-search-results style="flex: 5" class="card"></app-search-results>
+    <app-search-fields
+      [subjects]="subjects"
+      style="flex: 3;"
+      (search)="searchResults($event)"
+      class="card"></app-search-fields>
+    <app-search-results
+      [foundedLessonsInHistory]="foundedLessonsInHistory"
+      style="flex: 5"
+      class="card"></app-search-results>
   </div>
 </div>
 

@@ -3,6 +3,7 @@ import {Lesson} from '../../shared/models/lesson';
 import {Subject} from '../../shared/models/subject';
 import {InMemoryDataSourceService} from '../../shared/repository/in-memory-data-source.service';
 import {DataSourceService} from '../../shared/repository/data-source.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-lessons',
@@ -14,7 +15,9 @@ export class LessonsComponent implements OnInit {
   lessons: Array<Lesson> = [];
   subjectsForHint: Array<Subject> = [];
   loadLessons = false;
-  constructor(private memoryDataSource: InMemoryDataSourceService, private dataSource: DataSourceService) { }
+  constructor(private memoryDataSource: InMemoryDataSourceService,
+              private dataSource: DataSourceService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.subjectsForHint = this.memoryDataSource.getAllSubject();
@@ -41,16 +44,30 @@ export class LessonsComponent implements OnInit {
     this.dataSource.startLesson(event.subject, event.topic)
       .subscribe(value => {
         console.log(value);
+      }, error => {
+        console.error(error);
+      }, () => {
         this.updateActiveLessonsList();
       });
   }
 
   successfulLesson(lesson: Lesson): void {
+    this.dataSource.endLesson(lesson).subscribe((value: number) => {
+      console.log(value);
+      this.updateActiveLessonsList();
+      this.snackBar.open('Lesson save successful', 'Close', { duration: 1000 });
+    }, (error: string) => {
+      console.log(error);
+    });
     console.log(lesson);
   }
 
   deleteLesson(lesson: Lesson): void {
-    console.log(lesson);
+    this.dataSource.cancelLesson(lesson).subscribe((value: number) => {
+      console.log(value);
+      this.updateActiveLessonsList();
+      this.snackBar.open('Lesson delete successful', 'Close', { duration: 1000 });
+    });
   }
 
 }

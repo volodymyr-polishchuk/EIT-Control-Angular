@@ -4,30 +4,27 @@
   <mat-card-content style="display: flex; flex-direction: column">
     <mat-form-field>
       <mat-label>Предмет</mat-label>
-      <select matNativeControl>
-        <option>Англійська мова</option>
-        <option>Географія</option>
-        <option>Історія</option>
-        <option>Українська мова</option>
+      <select matNativeControl #subjectSelect>
+        <option *ngFor="let subject of subjects" [value]="subject.key">{{ subject.name }}</option>
       </select>
     </mat-form-field>
 
-    <mat-checkbox style="padding-bottom: 20px">Групувати</mat-checkbox>
+    <mat-checkbox style="padding-bottom: 20px" #groupCheckbox>Групувати</mat-checkbox>
 
     <mat-form-field>
       <mat-label>З дати:</mat-label>
-      <input matNativeControl type="date">
+      <input matNativeControl type="date" #fromDateInput>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>По дату:</mat-label>
-      <input matNativeControl type="date">
+      <input matNativeControl type="date" #toDateInput>
     </mat-form-field>
   </mat-card-content>
 
   <mat-card-actions style="display: flex; justify-content: space-between; align-items: baseline">
     <div>
-      <button mat-raised-button color="accent">Пошук</button>
+      <button mat-raised-button color="accent" (click)="onButtonClick(subjectSelect, groupCheckbox, fromDateInput, toDateInput)">Пошук</button>
     </div>
     <div>
       <app-mini-button [value]="'Сьогодні'"></app-mini-button>

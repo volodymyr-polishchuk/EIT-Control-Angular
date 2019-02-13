@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {LessonInHistory} from '../../../shared/models/lesson_in_history';
 
 @Component({
   selector: 'app-search-results',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchResultsComponent implements OnInit {
 
+  @Input() foundedLessonsInHistory: Array<LessonInHistory> = [];
   constructor() { }
 
   ngOnInit() {

@@ -4,8 +4,8 @@
 
   <mat-card-content>
     <div>
-      <app-result-item></app-result-item>
-      <app-result-item></app-result-item>
+      <app-result-item *ngFor="let lessonInHistory of foundedLessonsInHistory"
+                       [lessonInHistory]="lessonInHistory"></app-result-item>
     </div>
   </mat-card-content>
 

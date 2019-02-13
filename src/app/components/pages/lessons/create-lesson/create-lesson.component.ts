@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Subject} from '../../../shared/models/subject';
 import {DataSourceService} from '../../../shared/repository/data-source.service';
-import {InMemoryDataSourceService} from '../../../shared/repository/in-memory-data-source.service';
 import {Topic} from '../../../shared/models/topic';
 import {MatSnackBar} from '@angular/material';
 import {Lesson} from '../../../shared/models/lesson';
@@ -18,7 +17,6 @@ export class CreateLessonComponent implements OnInit {
   lessons: Array<Lesson> = [];
   @Output() onCreateLesson: EventEmitter<Lesson> = new EventEmitter<Lesson>();
   constructor(private dataSource: DataSourceService,
-              private ds: InMemoryDataSourceService,
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {

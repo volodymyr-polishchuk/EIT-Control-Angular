@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import {Subject} from '../models/subject';
 import {Topic} from '../models/topic';
+import {Lesson} from '../models/lesson';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,33 @@ export class DataSourceService {
     return this.http.get(
       `${environment.BASE_URL}/all_lessons.php`,
     );
+  }
+
+  cancelLesson(lesson: Lesson): Observable<Object> {
+    const formData: FormData = new FormData();
+    formData.append('lesson_id', lesson.id);
+    return this.http.post(`${environment.BASE_URL}/cancel_lesson.php`, formData);
+  }
+
+  endLesson(lesson: Lesson): Observable<Object> {
+    const formData: FormData = new FormData();
+    formData.append('lesson_id', lesson.id);
+    return this.http.post(`${environment.BASE_URL}/success_lesson.php`, formData);
+  }
+
+  getHistory(subjectKey: string, group: string, fromDate: string, toDate: string): Observable<Object> {
+    const params: HttpParams = new HttpParams();
+    params.append('subject', subjectKey);
+    params.append('group', group);
+    params.append('from_date', fromDate);
+    params.append('to_date', toDate);
+    console.log(params);
+    return this.http.get(`${environment.BASE_URL}/get_history.php`, {
+      params: {
+        subject: subjectKey,
+        group: group,
+        from_date: fromDate,
+        toDate: toDate
+      }});
   }
 }
