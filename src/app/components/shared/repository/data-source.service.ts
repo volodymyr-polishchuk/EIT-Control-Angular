@@ -69,13 +69,12 @@ export class DataSourceService {
     params.append('group', group);
     params.append('from_date', fromDate);
     params.append('to_date', toDate);
-    console.log(params);
     return this.http.get(`${environment.BASE_URL}/get_history.php`, {
       params: {
         subject: subjectKey,
         group: group,
         from_date: fromDate,
-        toDate: toDate
+        to_date: toDate
       }});
   }
 }

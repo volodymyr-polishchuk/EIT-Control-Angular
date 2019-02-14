@@ -33,8 +33,8 @@ export class SearchFieldsComponent implements OnInit {
              toDateInput: HTMLInputElement) {
     subjectSelect.selectedIndex = 0;
     groupCheckbox.checked = false;
-    fromDateInput.valueAsDate = new Date();
-    toDateInput.valueAsDate = new Date();
+    fromDateInput.valueAsNumber = Date.now();
+    toDateInput.valueAsNumber = Date.now();
     this.onButtonClick(subjectSelect, groupCheckbox, fromDateInput, toDateInput);
   }
 
@@ -44,8 +44,8 @@ export class SearchFieldsComponent implements OnInit {
                 toDateInput: HTMLInputElement) {
     subjectSelect.selectedIndex = 0;
     groupCheckbox.checked = false;
-    fromDateInput.valueAsDate = new Date(Date.now() - 1000 * 60 * 60 * 24);
-    toDateInput.valueAsDate = new Date(Date.now() - 1000 * 60 * 60 * 24);
+    fromDateInput.valueAsNumber = Date.now() - 1000 * 60 * 60 * 24;
+    toDateInput.valueAsNumber = Date.now() - 1000 * 60 * 60 * 24;
     this.onButtonClick(subjectSelect, groupCheckbox, fromDateInput, toDateInput);
   }
 
