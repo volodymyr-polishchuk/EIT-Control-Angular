@@ -27,20 +27,36 @@ export class ResultItemComponent implements OnInit {
   }
 
   getStartTime(): string {
-    return this.lessonInHistory.dateStart.toLocaleTimeString('uk', { hour: 'numeric', minute: 'numeric' });
+    if (this.lessonInHistory.dateStart.getTime()) {
+      return this.lessonInHistory.dateStart.toLocaleTimeString('uk', { hour: 'numeric', minute: 'numeric' });
+    } else {
+      return '--:--';
+    }
   }
 
   getEndTime(): string {
-    return this.lessonInHistory.dateEnd.toLocaleTimeString('uk', { hour: 'numeric', minute: 'numeric' });
+    if (this.lessonInHistory.dateEnd.getTime()) {
+      return this.lessonInHistory.dateEnd.toLocaleTimeString('uk', { hour: 'numeric', minute: 'numeric' });
+    } else {
+      return '--:--';
+    }
   }
 
   getDate(): string {
-    return this.lessonInHistory.dateStart.toLocaleString('uk', {year: 'numeric', month: 'long', day: 'numeric'});
+    if (this.lessonInHistory.dateStart.getTime()) {
+      return this.lessonInHistory.dateStart.toLocaleString('uk', {year: 'numeric', month: 'long', day: 'numeric'});
+    } else {
+      return '--.--.----';
+    }
   }
 
   getSum(): string {
-    return ResultItemComponent.timeFormat(
-      Math.floor((this.lessonInHistory.dateEnd.getTime() - this.lessonInHistory.dateStart.getTime()) / 1000)
-    );
+    if (this.lessonInHistory.dateStart.getTime() && this.lessonInHistory.dateEnd.getTime()) {
+      return ResultItemComponent.timeFormat(
+        Math.floor((this.lessonInHistory.dateEnd.getTime() - this.lessonInHistory.dateStart.getTime()) / 1000)
+      );
+    } else {
+      return ResultItemComponent.timeFormat(this.lessonInHistory.time);
+    }
   }
 }

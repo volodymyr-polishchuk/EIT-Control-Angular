@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DataSourceService} from '../../shared/repository/data-source.service';
 import {LessonInHistory} from '../../shared/models/lesson_in_history';
 import {Subject} from '../../shared/models/subject';
-import {Topic} from '../../shared/models/topic';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-results',
@@ -13,7 +13,7 @@ export class ResultsComponent implements OnInit {
 
   subjects: Array<Subject> = [];
   foundedLessonsInHistory: Array<LessonInHistory> = [];
-  constructor(private dataSource: DataSourceService) { }
+  constructor(private dataSource: DataSourceService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.dataSource.getAllSubject().subscribe(
@@ -26,6 +26,9 @@ export class ResultsComponent implements OnInit {
   searchResults(event: {subjectKey: string, group: string, fromDate: string, toDate: string}): void {
     this.dataSource.getHistory(event.subjectKey, event.group, event.fromDate, event.toDate)
       .subscribe((value: Array<{dateStart: string, dateEnd: string, subjectName: string, themeName: string, time: string}>) => {
+        if (value.length === 0) {
+          this.snackBar.open('За таким запитом нічого не знайдено', 'Close', { duration: 3000 });
+        }
         this.foundedLessonsInHistory = value.map(it => ({
           dateStart: new Date(it.dateStart),
           dateEnd: new Date(it.dateEnd),

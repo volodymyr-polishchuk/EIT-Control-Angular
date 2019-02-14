@@ -8,6 +8,7 @@
                        [lessonInHistory]="lessonInHistory"></app-result-item>
     </div>
     <mat-paginator
+      style="height: 40px"
       [length]="foundedLessonsInHistory.length"
       [pageSize]="5"
       (page)="updateLessonInHistory($event)">

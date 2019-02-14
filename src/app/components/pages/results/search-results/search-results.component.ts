@@ -19,7 +19,11 @@ export class SearchResultsComponent implements OnInit, OnChanges {
   }
 
   reduceDate(result: number, value: LessonInHistory): number {
-    return result + Math.floor((value.dateEnd.getTime() - value.dateStart.getTime()) / 1000);
+    if (value.dateEnd.getTime() && value.dateStart.getTime()) {
+      return result + Math.floor((value.dateEnd.getTime() - value.dateStart.getTime()) / 1000);
+    } else {
+      return result + value.time;
+    }
   }
 
   timeFormat(second: number) {
@@ -31,6 +35,7 @@ export class SearchResultsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.paginator.firstPage();
     this.paginator.page.emit({
       pageIndex: 0,
       length: this.foundedLessonsInHistory.length,
