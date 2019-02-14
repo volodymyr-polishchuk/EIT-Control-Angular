@@ -27,4 +27,26 @@ export class SearchFieldsComponent implements OnInit {
     this.search.emit({subjectKey: subjectKey, group: group, fromDate: fromDate, toDate: toDate});
   }
 
+  todayClick(subjectSelect: HTMLSelectElement,
+             groupCheckbox: MatCheckbox,
+             fromDateInput: HTMLInputElement,
+             toDateInput: HTMLInputElement) {
+    subjectSelect.selectedIndex = 0;
+    groupCheckbox.checked = false;
+    fromDateInput.valueAsDate = new Date();
+    toDateInput.valueAsDate = new Date();
+    this.onButtonClick(subjectSelect, groupCheckbox, fromDateInput, toDateInput);
+  }
+
+  tomorrowClick(subjectSelect: HTMLSelectElement,
+                groupCheckbox: MatCheckbox,
+                fromDateInput: HTMLInputElement,
+                toDateInput: HTMLInputElement) {
+    subjectSelect.selectedIndex = 0;
+    groupCheckbox.checked = false;
+    fromDateInput.valueAsDate = new Date(Date.now() - 1000 * 60 * 60 * 24);
+    toDateInput.valueAsDate = new Date(Date.now() - 1000 * 60 * 60 * 24);
+    this.onButtonClick(subjectSelect, groupCheckbox, fromDateInput, toDateInput);
+  }
+
 }

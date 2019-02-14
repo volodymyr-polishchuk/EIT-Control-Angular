@@ -19,17 +19,13 @@ export class ResultsComponent implements OnInit {
     this.dataSource.getAllSubject().subscribe(
       (next: Array<{k: string; name: string}>) => {
         this.subjects = next.map((item) => ({key: item.k, name: item.name}));
+        this.subjects.unshift({key: '0', name: 'Всі предмети'});
       });
   }
 
   searchResults(event: {subjectKey: string, group: string, fromDate: string, toDate: string}): void {
     this.dataSource.getHistory(event.subjectKey, event.group, event.fromDate, event.toDate)
-      .subscribe((value: Array<{
-        dateEnd: string,
-        dateStart: string,
-        subjectName: string,
-        themeName: string,
-        time: string}>) => {
+      .subscribe((value: Array<{dateStart: string, dateEnd: string, subjectName: string, themeName: string, time: string}>) => {
         this.foundedLessonsInHistory = value.map(it => ({
           dateStart: new Date(it.dateStart),
           dateEnd: new Date(it.dateEnd),

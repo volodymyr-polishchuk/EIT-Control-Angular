@@ -27,8 +27,11 @@
       <button mat-raised-button color="accent" (click)="onButtonClick(subjectSelect, groupCheckbox, fromDateInput, toDateInput)">Пошук</button>
     </div>
     <div>
-      <app-mini-button [value]="'Сьогодні'"></app-mini-button>
-      <app-mini-button [value]="'Вчора'"></app-mini-button>
+      <app-mini-button [value]="'Сьогодні'" (click)="todayClick(subjectSelect, groupCheckbox, fromDateInput, toDateInput)">
+      </app-mini-button>
+      <app-mini-button [value]="'Вчора'" (click)="tomorrowClick(subjectSelect, groupCheckbox, fromDateInput, toDateInput)">
+
+      </app-mini-button>
     </div>
   </mat-card-actions>
 

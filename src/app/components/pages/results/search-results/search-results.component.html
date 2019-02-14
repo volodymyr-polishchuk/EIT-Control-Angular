@@ -4,16 +4,21 @@
 
   <mat-card-content>
     <div>
-      <app-result-item *ngFor="let lessonInHistory of foundedLessonsInHistory"
+      <app-result-item *ngFor="let lessonInHistory of pageLessonsInHistory"
                        [lessonInHistory]="lessonInHistory"></app-result-item>
     </div>
+    <mat-paginator
+      [length]="foundedLessonsInHistory.length"
+      [pageSize]="5"
+      (page)="updateLessonInHistory($event)">
+    </mat-paginator>
   </mat-card-content>
 
   <mat-card-actions>
     <div style="margin-top: auto">
       <mat-divider></mat-divider>
       <div style="padding-top: 8px">
-        За вибраний період: 000:00
+        За вибраний період: {{ timeFormat(foundedLessonsInHistory.reduce(reduceDate, 0)) }}
       </div>
     </div>
   </mat-card-actions>

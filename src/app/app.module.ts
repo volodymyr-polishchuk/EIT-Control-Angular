@@ -10,7 +10,7 @@ import {
   MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatPaginatorModule,
   MatSelectModule, MatSnackBarModule
 } from '@angular/material';
 import { NavBarComponent } from './components/shared/nav-bar/nav-bar.component';
@@ -61,7 +61,8 @@ import {JwtInterceptorService} from './components/shared/jwt-interceptor.service
     MatCheckboxModule,
     HttpClientModule,
     MatAutocompleteModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }
