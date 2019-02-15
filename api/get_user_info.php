@@ -8,12 +8,12 @@ $auth_k = $_COOKIE['auth-k'];
 
 $PDO = EIT_DAO::getConnection();
 $query = "SELECT login, 
-                     name, 
-                     description 
-                FROM users_eit 
-               WHERE k LIKE ? 
-                     AND password_hash LIKE ? 
-               LIMIT 1;";
+                 name, 
+                 description 
+            FROM users_eit 
+           WHERE k LIKE ? 
+                 AND password_hash LIKE ? 
+           LIMIT 1;";
 $statement = $PDO->prepare($query);
 if (!$statement->execute(array($auth_k, $auth_token))) {
     die($statement->errorInfo());

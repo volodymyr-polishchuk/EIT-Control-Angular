@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataSourceService} from '../../shared/repository/data-source.service';
 import {LessonInHistory} from '../../shared/models/lesson_in_history';
 import {Subject} from '../../shared/models/subject';
@@ -15,6 +15,20 @@ export class ResultsComponent implements OnInit {
   foundedLessonsInHistory: Array<LessonInHistory> = [];
   constructor(private dataSource: DataSourceService, private snackBar: MatSnackBar) { }
 
+  static parseDate(value: string): Date {
+    const date = new Date(value);
+    if (date.getTime()) {
+      return date;
+    } else {
+      const t = value.split(/[- :]/).map(i => Number(i));
+      try {
+        return new Date(Date.UTC(Number(t[0]), t[1] - 1, t[2], t[3], t[4], t[5]));
+      } catch (e) {
+        return new Date(Number.NaN);
+      }
+    }
+  }
+
   ngOnInit() {
     this.dataSource.getAllSubject().subscribe(
       (next: Array<{k: string; name: string}>) => {
@@ -30,11 +44,11 @@ export class ResultsComponent implements OnInit {
           this.snackBar.open('За таким запитом нічого не знайдено', 'Close', { duration: 3000 });
         }
         this.foundedLessonsInHistory = value.map(it => ({
-          dateStart: new Date(it.dateStart),
-          dateEnd: new Date(it.dateEnd),
-          subject: { key: '-1', name: it.subjectName },
-          topic: { key: '-1', name: it.themeName },
-          time: Number(it.time)
+            dateStart: ResultsComponent.parseDate(it.dateStart),
+            dateEnd: ResultsComponent.parseDate(it.dateEnd),
+            subject: { key: '-1', name: it.subjectName },
+            topic: { key: '-1', name: it.themeName },
+            time: Number(it.time)
         }));
       });
   }

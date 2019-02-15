@@ -34,6 +34,10 @@ export class CreateLessonComponent implements OnInit {
   }
 
   startLesson(subjectSelect: any, topicInput: HTMLInputElement): void {
+    if (!topicInput.value) {
+      this.snackBar.open('Тема заняття не може бути пустою', 'Закрити', { duration: 2000 });
+      return;
+    }
     let topic: Topic = this.topics.find(t => t.name === topicInput.value);
     if (!topic) {
       topic = {key: '-1', name: topicInput.value};

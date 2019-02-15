@@ -38,18 +38,18 @@ if ($to_date == "") {
 }
 
 $sql_query = "SELECT subject.name AS subjectName, 
-                         theme.name AS themeName, 
-                         $date_start_end
-                         $group_sum(UNIX_TIMESTAMP(date_end) - UNIX_TIMESTAMP(date_start)) AS 'time' 
-                    FROM `lessons` 
-                         INNER JOIN subject ON subject.k = lessons.subject 
-                         INNER JOIN theme ON theme.k = lessons.theme 
-                   WHERE lessons.subject LIKE '$subject' 
-                         AND lessons.active LIKE '0' 
-                         AND $from_date_piece 
-                         AND $to_date_piece 
-                  $group_by
-                   ORDER BY lessons.date_start DESC";
+                     theme.name AS themeName, 
+                     $date_start_end
+                     $group_sum(UNIX_TIMESTAMP(date_end) - UNIX_TIMESTAMP(date_start)) AS 'time' 
+                FROM `lessons` 
+                     INNER JOIN subject ON subject.k = lessons.subject 
+                     INNER JOIN theme ON theme.k = lessons.theme 
+               WHERE lessons.subject LIKE '$subject' 
+                     AND lessons.active LIKE '0' 
+                     AND $from_date_piece 
+                     AND $to_date_piece 
+              $group_by
+               ORDER BY lessons.date_start DESC";
 
 $connection = EIT_DAO::getConnection();
 

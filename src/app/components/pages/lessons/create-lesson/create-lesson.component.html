@@ -9,7 +9,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input type="text" placeholder="Тема" aria-label="Number" matInput [matAutocomplete]="auto" #topic_input>
+      <input type="text" placeholder="Тема" aria-label="Number" matInput [matAutocomplete]="auto" required #topic_input>
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let topic of topics" [value]="topic.name">
           {{ topic.name }}
