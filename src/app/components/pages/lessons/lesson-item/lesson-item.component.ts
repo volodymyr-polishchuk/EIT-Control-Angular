@@ -35,7 +35,9 @@ export class LessonItemComponent implements OnInit {
   }
 
   deleteLesson() {
-    this.delete.emit(this.lesson);
+    if (confirm('Ви точно бажаєте відмінити заняття?\nВідновити інформацію не можливо')) {
+      this.delete.emit(this.lesson);
+    }
   }
 
 }
