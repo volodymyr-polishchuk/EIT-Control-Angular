@@ -1,0 +1,5 @@
+.statistics__item__wrapper {
+  padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+}

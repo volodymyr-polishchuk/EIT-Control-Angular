@@ -29,6 +29,7 @@ import { ResultItemComponent } from './components/pages/results/search-results/r
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { MiniButtonComponent } from './components/shared/mini-button/mini-button.component';
 import {JwtInterceptorService} from './components/shared/jwt-interceptor.service';
+import { StatisticsItemComponent } from './components/pages/statistics/statistics-item/statistics-item.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {JwtInterceptorService} from './components/shared/jwt-interceptor.service
     SearchFieldsComponent,
     SearchResultsComponent,
     ResultItemComponent,
-    MiniButtonComponent
+    MiniButtonComponent,
+    StatisticsItemComponent
   ],
   imports: [
     BrowserModule,

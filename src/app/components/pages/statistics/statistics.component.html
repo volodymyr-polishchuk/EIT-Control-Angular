@@ -1,25 +1,23 @@
 <div class="main__wrapper">
   <div class="main__container">
-    <mat-card class="card" style="flex: 1;">
+    <mat-card class="card">
       <mat-card-title>Статистика</mat-card-title>
-      <mat-card-content style="max-width: 250px">
-        <div style="display: flex; justify-content: space-between">
-          <span>Англійська мова</span>
-          <span>000:00</span>
-        </div>
-        <div style="display: flex; justify-content: space-between">
-          <span>Географія</span>
-          <span>000:00</span>
-        </div>
-        <div style="display: flex; justify-content: space-between">
-          <span>Історія</span>
-          <span>000:00</span>
-        </div>
-        <div style="display: flex; justify-content: space-between">
-          <span>Українська мова</span>
-          <span>000:00</span>
-        </div>
+      <mat-card-content class="statistics__items">
+        <app-statistics-item
+          *ngFor="let statisticsItem of statistics"
+          [formattedTime]="statisticsItem.formatted_time"
+          [subjectName]="statisticsItem.subject_name">
+        </app-statistics-item>
       </mat-card-content>
+      <mat-card-actions class="statistics__bottom">
+        <div>
+          <mat-divider></mat-divider>
+          <app-statistics-item
+            [subjectName]="'Всього:'"
+            [formattedTime]="getTimeSumFormatted()">
+          </app-statistics-item>
+        </div>
+      </mat-card-actions>
     </mat-card>
   </div>
 </div>

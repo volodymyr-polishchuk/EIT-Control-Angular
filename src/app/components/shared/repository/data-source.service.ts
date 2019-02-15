@@ -81,4 +81,10 @@ export class DataSourceService {
   getSubjectThatNotLearnYesterday(): Observable<Array<{subjectName: string}>> {
     return this.http.get<Array<{subjectName: string}>>(`${environment.BASE_URL}/get_subject_that_not_learn_yesterday.php`);
   }
+
+  getStatistics(): Observable<Array<{formatted_time: string, seconds: number, subject_name: string}>> {
+    return this.http.get<Array<{formatted_time: string, seconds: number, subject_name: string}>>(
+      `${environment.BASE_URL}/get_statistics.php`
+    );
+  }
 }

@@ -12,3 +12,15 @@
 .card {
   margin: 4px;
 }
+
+.statistics__items {
+  max-width: 250px;
+}
+
+.card {
+  flex: 1;
+}
+
+.statistics__bottom {
+  max-width: 260px;
+}
