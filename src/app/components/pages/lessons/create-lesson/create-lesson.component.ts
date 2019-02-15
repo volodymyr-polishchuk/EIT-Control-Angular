@@ -4,6 +4,9 @@ import {DataSourceService} from '../../../shared/repository/data-source.service'
 import {Topic} from '../../../shared/models/topic';
 import {MatSnackBar} from '@angular/material';
 import {Lesson} from '../../../shared/models/lesson';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-lesson',
@@ -12,9 +15,12 @@ import {Lesson} from '../../../shared/models/lesson';
 })
 export class CreateLessonComponent implements OnInit {
 
+  topicControl = new FormControl();
   subjects: Array<Subject> = [];
   topics: Array<Topic> = [];
+  filteredTopics: Observable<Array<Topic>>;
   lessons: Array<Lesson> = [];
+  lastSubjectKey: string;
   @Output() onCreateLesson: EventEmitter<Lesson> = new EventEmitter<Lesson>();
   constructor(private dataSource: DataSourceService,
               private snackBar: MatSnackBar) { }
@@ -54,9 +60,36 @@ export class CreateLessonComponent implements OnInit {
   }
 
   refreshTopicsList(key: string): void {
+    if (key === '-1') {
+      key = this.lastSubjectKey;
+    }
+    this.lastSubjectKey = key;
     this.dataSource.getTopicsForSubject(key)
       .subscribe((value: Array<{k: string, name: string}>) => {
         this.topics = value.map((it) => ({key: it.k, name: it.name}));
+        this.filteredTopics = this.topicControl.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filterTopic(value))
+          );
+        (document.getElementById('topicInput') as HTMLInputElement).value = '';
       });
+  }
+
+  private _filterTopic(value: string): Array<Topic> {
+    const topicName = value.toLowerCase();
+    return this.topics.filter(option => option.name.toLowerCase().includes(topicName));
+  }
+
+  removeTopic(topic: Topic): void {
+    if (confirm(`Ви точно бажаєте видалити тему [${topic.name}]`)) {
+      this.dataSource.deleteTopic(topic)
+        .subscribe(value => {
+          this.refreshTopicsList('-1');
+          this.snackBar.open('Тема успішно видалена', 'Закрити', { duration: 2000 });
+        }, (error) => {
+          this.snackBar.open(error.error.message, 'Закрити', { duration: 2000 });
+        });
+    }
   }
 }

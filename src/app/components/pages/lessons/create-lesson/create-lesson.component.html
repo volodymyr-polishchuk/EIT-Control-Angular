@@ -9,10 +9,22 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input type="text" placeholder="Тема" aria-label="Number" matInput [matAutocomplete]="auto" required #topic_input>
+      <input
+        id="topicInput"
+        type="text"
+        placeholder="Тема"
+        aria-label="Number"
+        matInput
+        [matAutocomplete]="auto"
+        [formControl]="topicControl"
+        required
+        #topic_input>
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let topic of topics" [value]="topic.name">
+        <mat-option *ngFor="let topic of filteredTopics | async" [value]="topic.name">
           {{ topic.name }}
+          <div class="topic__option__delete__button__wrapper">
+            <div class="topic__option__delete__button" (click)="removeTopic(topic)">X</div>
+          </div>
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>

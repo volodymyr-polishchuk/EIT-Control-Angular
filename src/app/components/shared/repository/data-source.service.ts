@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
+import {Observable} from 'rxjs';
+import {environment} from '../../../../environments/environment';
 import {Subject} from '../models/subject';
 import {Topic} from '../models/topic';
 import {Lesson} from '../models/lesson';
@@ -86,5 +86,11 @@ export class DataSourceService {
     return this.http.get<Array<{formatted_time: string, seconds: number, subject_name: string}>>(
       `${environment.BASE_URL}/get_statistics.php`
     );
+  }
+
+  deleteTopic(topic: Topic): Observable<Object> {
+    const formData: FormData = new FormData();
+    formData.append('topic_id', topic.key);
+    return this.http.post(`${environment.BASE_URL}/delete_topic.php`, formData);
   }
 }

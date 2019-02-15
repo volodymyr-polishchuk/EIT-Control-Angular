@@ -7,3 +7,33 @@
   display: flex;
   flex-direction: column;
 }
+
+.topic__option__delete__button {
+  /*border: 1px solid white;*/
+  right: 0;
+  width: 24px;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  font-family: 'Courier New', serif;
+  position: absolute;
+  background: indianred;
+  opacity: 0.75;
+}
+
+.topic__option__delete__button:hover {
+  opacity: 1;
+}
+
+.topic__option__delete__button__wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+}
+
+.topic__option__delete__button__wrapper:hover {
+  opacity: 1;
+}
