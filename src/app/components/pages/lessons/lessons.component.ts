@@ -15,11 +15,17 @@ export class LessonsComponent implements OnInit {
   lessons: Array<Lesson> = [];
   subjectsForHint: Array<Subject> = [];
   loadLessons = false;
+  subjectForHintLoad = false;
   constructor(private memoryDataSource: InMemoryDataSourceService,
               private dataSource: DataSourceService,
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.dataSource.getSubjectThatNotLearnYesterday()
+      .subscribe((value) => {
+        this.subjectsForHint = value.map<Subject>(item => ({key: '-1', name: item.subjectName}));
+        this.subjectForHintLoad = true;
+      });
     this.subjectsForHint = this.memoryDataSource.getAllSubject();
     this.updateActiveLessonsList();
   }

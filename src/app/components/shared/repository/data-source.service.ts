@@ -77,4 +77,8 @@ export class DataSourceService {
         to_date: toDate
       }});
   }
+
+  getSubjectThatNotLearnYesterday(): Observable<Array<{subjectName: string}>> {
+    return this.http.get<Array<{subjectName: string}>>(`${environment.BASE_URL}/get_subject_that_not_learn_yesterday.php`);
+  }
 }

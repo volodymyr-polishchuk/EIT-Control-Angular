@@ -15,7 +15,7 @@
       (deleteLesson)="deleteLesson($event)">
     </app-active-lessons>
 
-    <app-hint
+    <app-hint *ngIf="subjectForHintLoad"
       style="flex: 3; flex-basis: 400px"
       class="card"
       [subjects]="subjectsForHint">
