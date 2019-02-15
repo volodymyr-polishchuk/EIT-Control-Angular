@@ -11,8 +11,12 @@ export class StatisticsComponent implements OnInit {
   statistics: Array<{formatted_time: string, seconds: number, subject_name: string}> = [];
   constructor(private dataSource: DataSourceService) { }
 
-  static timeFormat(second: number) {
-    return Math.floor(second / 60) + ':' + ((second % 60) >= 10 ? (second % 60) : ('0' + (second % 60)));
+  static timeFormat(time) {
+    const seconds = ((time % 60) >= 10 ? (time % 60) : ('0' + (time % 60)));
+    const numberOfMinutes = Math.floor(time / 60) % 60;
+    const minutes = numberOfMinutes >= 10 ? numberOfMinutes : ('0' + numberOfMinutes);
+    const hours = Math.floor(time / (60 * 60));
+    return hours + ':' + minutes + ':' + seconds;
   }
 
   ngOnInit() {
