@@ -1,7 +1,13 @@
 <div class="main__wrapper">
   <div class="main__container">
     <mat-card class="card">
-      <mat-card-title>Статистика</mat-card-title>
+      <mat-card-title style="display: flex; justify-content: space-between; max-width: 250px">
+        Статистика
+        <div style="display: flex; flex-direction: column; text-align: center">
+          <span style="font-size: 11px">поточний тиждень</span>
+          <span style="font-size: 11px">{{ efficiency.toFixed(2) }}%</span>
+        </div>
+      </mat-card-title>
       <mat-card-content class="statistics__items">
         <app-statistics-item
           *ngFor="let statisticsItem of statistics"

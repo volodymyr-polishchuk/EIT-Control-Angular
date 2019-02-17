@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataSourceService} from '../../shared/repository/data-source.service';
 
 @Component({
@@ -8,6 +8,7 @@ import {DataSourceService} from '../../shared/repository/data-source.service';
 })
 export class StatisticsComponent implements OnInit {
 
+  efficiency: Number = 0;
   statistics: Array<{formatted_time: string, seconds: number, subject_name: string}> = [];
   constructor(private dataSource: DataSourceService) { }
 
@@ -23,6 +24,11 @@ export class StatisticsComponent implements OnInit {
     this.dataSource.getStatistics()
       .subscribe(value => {
         this.statistics = value;
+      });
+    this.dataSource.getEfficiency()
+      .subscribe(value => {
+        console.log(value);
+        this.efficiency = Number(value.efficiency);
       });
   }
 

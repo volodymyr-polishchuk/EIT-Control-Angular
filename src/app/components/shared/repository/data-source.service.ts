@@ -93,4 +93,8 @@ export class DataSourceService {
     formData.append('topic_id', topic.key);
     return this.http.post(`${environment.BASE_URL}/delete_topic.php`, formData);
   }
+
+  getEfficiency(): Observable<{efficiency: number}> {
+    return this.http.get<{efficiency: number}>(`${environment.BASE_URL}/get_efficiency.php`);
+  }
 }
