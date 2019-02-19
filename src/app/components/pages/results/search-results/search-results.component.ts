@@ -31,7 +31,10 @@ export class SearchResultsComponent implements OnInit, OnChanges {
   }
 
   updateLessonInHistory(event) {
-    this.pageLessonsInHistory = this.foundedLessonsInHistory.slice(event.pageIndex, event.pageIndex + event.pageSize);
+    this.pageLessonsInHistory = this.foundedLessonsInHistory.slice(
+      event.pageIndex * event.pageSize,
+      event.pageIndex * event.pageSize + event.pageSize
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
