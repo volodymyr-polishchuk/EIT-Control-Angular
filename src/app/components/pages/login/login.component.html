@@ -1,0 +1,36 @@
+<div class="login__wrapper">
+  <div class="login__container">
+    <mat-card
+      class="card"
+      style="flex: 1">
+      <mat-card-title>Авторизація</mat-card-title>
+      <mat-card-content style="display: flex; flex-direction: column">
+        <form [formGroup]="form" (ngSubmit)="login()" style="display: flex; flex-direction: column">
+          <mat-form-field>
+            <input matInput placeholder="Ім'я користувача" type="text" formControlName="userName" required>
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="isFieldInvalid('userName')">
+              Please inform your user name
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Пароль" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+            <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="isFieldInvalid('userName')">
+              Please inform your password
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <mat-checkbox id="remember-me"></mat-checkbox>
+            <label for="remember-me"> Запам'ятати мене?</label>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 8px">
+            <button mat-stroked-button color="accent" disabled>Зареєструватися</button>
+            <button mat-raised-button color="accent">Увійти</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+

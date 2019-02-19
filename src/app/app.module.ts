@@ -30,9 +30,11 @@ import {SearchResultsComponent} from './components/pages/results/search-results/
 import {ResultItemComponent} from './components/pages/results/search-results/result-item/result-item.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MiniButtonComponent} from './components/shared/mini-button/mini-button.component';
-import {JwtInterceptorService} from './components/shared/jwt-interceptor.service';
+import {JwtInterceptorService} from './components/shared/interceptors/jwt-interceptor.service';
 import {StatisticsItemComponent} from './components/pages/statistics/statistics-item/statistics-item.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {LoginComponent} from './components/pages/login/login.component';
+import {MainContainerComponent} from './components/pages/main-container/main-container.component';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     SearchResultsComponent,
     ResultItemComponent,
     MiniButtonComponent,
-    StatisticsItemComponent
+    StatisticsItemComponent,
+    LoginComponent,
+    MainContainerComponent
   ],
   imports: [
     BrowserModule,
