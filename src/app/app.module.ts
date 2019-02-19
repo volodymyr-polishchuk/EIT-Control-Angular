@@ -35,6 +35,7 @@ import {StatisticsItemComponent} from './components/pages/statistics/statistics-
 import {ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from './components/pages/login/login.component';
 import {MainContainerComponent} from './components/pages/main-container/main-container.component';
+import {HttpErrorInterceptor} from './components/shared/interceptors/error-interceptor.service';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import {MainContainerComponent} from './components/pages/main-container/main-con
     ReactiveFormsModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

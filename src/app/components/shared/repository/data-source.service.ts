@@ -14,13 +14,6 @@ export class DataSourceService {
   constructor(private http: HttpClient) {
   }
 
-  login(): Observable<Object> {
-    const formData: FormData = new FormData();
-    formData.append('login', 'volodymyr');
-    formData.append('password', 'admin');
-    return this.http.post(`http://eit.hwork.net/login.php`, formData);
-  }
-
   getAllSubject(): Observable<Object> {
     return this.http.get(
       `${environment.BASE_URL}/all_subject.php`
@@ -96,5 +89,12 @@ export class DataSourceService {
 
   getEfficiency(): Observable<{efficiency: number}> {
     return this.http.get<{efficiency: number}>(`${environment.BASE_URL}/get_efficiency.php`);
+  }
+
+  login(login: string, password: string): Observable<{auth_token: string}> {
+    const formData = new FormData();
+    formData.append('login', login);
+    formData.append('password', password);
+    return this.http.post<{auth_token: string}>(`${environment.BASE_URL}/get_user_token.php`, formData);
   }
 }

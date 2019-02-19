@@ -5,8 +5,7 @@ require_once('connect.php');
 $code = $_GET["subject_code"];
 
 $connection = EIT_DAO::getConnection();
-// TODO change it for read user from HEADERS
-$user = ($_COOKIE['auth-k'] ? $_COOKIE['auth-k'] : '1');
+$user = $user_information['k'];
 if (!is_numeric($user)) die(403);
 
 $query = "SELECT theme.k, 

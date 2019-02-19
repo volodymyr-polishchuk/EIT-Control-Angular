@@ -4,8 +4,7 @@ include "auth.php";
 require_once('connect.php');
 
 $connection = EIT_DAO::getConnection();
-// TODO get auth-k from HEADERS
-$user = ( $_COOKIE['auth-k'] ? $_COOKIE['auth-k'] : '1');
+$user = $user_information['k'];
 if (!is_numeric($user)) die(403);
 $query = "SELECT lessons.k AS lessonID, 
                  subject.name AS lessonName, 
