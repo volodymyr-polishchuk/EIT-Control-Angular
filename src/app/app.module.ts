@@ -73,7 +73,7 @@ import {HttpErrorInterceptor} from './components/shared/interceptors/error-inter
     MatAutocompleteModule,
     MatSnackBarModule,
     MatPaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },

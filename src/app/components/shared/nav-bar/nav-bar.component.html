@@ -1,13 +1,35 @@
 <mat-card class="main">
   <div class="main__wrapper">
-    <div>
-      <button mat-button routerLink="lessons">Заняття</button>
+    <div class="wide__screen">
+      <div>
+        <button mat-button routerLink="lessons">Заняття</button>
+      </div>
+      <div>
+        <button mat-button routerLink="results">Історія</button>
+      </div>
+      <div>
+        <button mat-button routerLink="settings">Статистика</button>
+      </div>
+      <div style="margin-left: auto">
+        <button mat-button routerLink="settings">Налаштування</button>
+      </div>
+      <div>
+        <button mat-button routerLink="settings">Вихід</button>
+      </div>
     </div>
-    <div>
-      <button mat-button routerLink="results">Результати</button>
-    </div>
-    <div>
-      <button mat-button routerLink="settings">Статистика</button>
+    <div class="mini__screen">
+      <div>
+        <button mat-button routerLink="lessons">Заняття</button>
+      </div>
+      <div>
+        <button mat-button routerLink="results">Історія</button>
+      </div>
+      <div>
+        <button mat-button routerLink="settings">Статистика</button>
+      </div>
+      <div class="settings__link">
+        <button mat-icon-button><mat-icon>settings</mat-icon></button>
+      </div>
     </div>
   </div>
 </mat-card>
