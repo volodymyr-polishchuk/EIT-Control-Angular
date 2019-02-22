@@ -1,12 +1,12 @@
 <div class="main__wrapper">
   <div class="main__container">
-    <div class="card" style="flex: 3; min-width: 250px">
-      <mat-card>
-        <mat-button-toggle-group vertical style="width: 100%">
-          <mat-button-toggle routerLink="profile">Профіль</mat-button-toggle>
-          <mat-button-toggle routerLink="subjects">Предмети</mat-button-toggle>
-          <mat-button-toggle routerLink="secure">Безпека</mat-button-toggle>
-          <mat-button-toggle>Вихід</mat-button-toggle>
+    <div class="card settings__left__panel" style="flex: 3; min-width: 250px">
+      <mat-card style="padding-left: 0; padding-right: 0">
+        <mat-button-toggle-group vertical style="width: 100%; border: 0">
+          <mat-button-toggle routerLink="profile" value="profile">Профіль</mat-button-toggle>
+          <mat-button-toggle routerLink="subjects" value="subjects">Предмети</mat-button-toggle>
+          <mat-button-toggle routerLink="secure" value="secure">Безпека</mat-button-toggle>
+          <mat-button-toggle (click)="logout()" value="exit">Вихід</mat-button-toggle>
         </mat-button-toggle-group>
       </mat-card>
     </div>

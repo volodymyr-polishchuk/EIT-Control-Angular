@@ -1,10 +1,13 @@
 <div class="subject__wrapper">
   <h2 style="margin-top: 0">Предмети</h2>
+  <div>
+    <mat-divider></mat-divider>
+  </div>
   <form [formGroup]="form" (ngSubmit)="createSubject()" style="display: flex; align-items: center">
     <mat-form-field style="flex: 1;">
-      <input matInput formControlName="subjectName" type="text" autocomplete="off">
+      <input matInput formControlName="subjectName" type="text" autocomplete="off" required>
       <mat-hint>Введіть назву предмету і натисніть на кнопку</mat-hint>
-      <mat-label>Додати новий предмет</mat-label>
+      <mat-label>Назва предмету</mat-label>
       <mat-error *ngIf="isFieldInvalid('subjectName')">
         Потібно вказати назву предмету
       </mat-error>
@@ -14,6 +17,9 @@
     </div>
   </form>
   <h2>Існуючі предмети</h2>
+  <div>
+    <mat-divider></mat-divider>
+  </div>
   <ul class="current__subject__list">
     <li *ngFor="let subject of subjects">
       {{ subject.name }}

@@ -28,16 +28,23 @@
 
 .current__subject__list li:hover {
   background-color: #515151;
-  font-weight: bold;
 }
 
 .current__subject__list li:focus {
   background-color: #515151;
-  font-weight: bold;
 }
 
 .current__subject__list li .list__item__icon {
   visibility: hidden;
+  cursor: pointer;
+}
+
+.current__subject__list li .list__item__icon:hover {
+  color: indianred;
+}
+
+.current__subject__list li .list__item__icon:focus {
+  color: indianred;
 }
 
 .current__subject__list li:hover .list__item__icon {

@@ -13,11 +13,21 @@
       <div style="margin-left: auto">
         <button mat-button routerLink="settings">Налаштування</button>
       </div>
-      <div>
-        <button mat-button>Вихід</button>
-      </div>
     </div>
     <div class="mini__screen">
+      <div id="settings__menu__wrapper" style="position: relative">
+        <div class="settings__menu__shadow" *ngIf="showMenu">
+          <mat-card class="settings__menu">
+            <button mat-button routerLink="settings/profile" (click)="showMenu = false">Профіль</button>
+            <button mat-button routerLink="settings/subjects" (click)="showMenu = false">Предмети</button>
+            <button mat-button routerLink="settings/secure" (click)="showMenu = false">Безпека</button>
+            <button mat-button (click)="logout()">Вихід</button>
+          </mat-card>
+          <div style="opacity: 0.1; background: black; height: 100%; width: 100vw;" (click)="showMenu = false">
+
+          </div>
+        </div>
+      </div>
       <div>
         <button mat-button routerLink="lessons">Заняття</button>
       </div>
@@ -27,8 +37,8 @@
       <div>
         <button mat-button routerLink="statistics">Статистика</button>
       </div>
-      <div class="settings__link" routerLink="settings">
-        <button mat-icon-button><mat-icon>settings</mat-icon></button>
+      <div id="settings__button__wrapper" class="settings__link" (click)="showMenu = !showMenu">
+        <button mat-icon-button class="settings__link__button"><mat-icon>settings</mat-icon></button>
       </div>
     </div>
   </div>

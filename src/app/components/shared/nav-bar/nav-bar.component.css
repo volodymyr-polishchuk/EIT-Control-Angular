@@ -48,3 +48,26 @@
   justify-content: center;
   align-items: center;
 }
+
+.settings__link__button {
+  height: 36px;
+  line-height: 1px;
+}
+
+.settings__menu__shadow {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: calc(100vh - 36px);
+}
+
+.settings__menu {
+  border-radius: 0;
+  background-color: #3d3d3d;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  padding-right: 0;
+}

@@ -12,3 +12,9 @@
 .card {
   margin: 4px;
 }
+
+@media all and (max-width: 799px) {
+  .settings__left__panel {
+    display: none;
+  }
+}
