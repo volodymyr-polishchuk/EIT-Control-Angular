@@ -1,0 +1,23 @@
+<div class="subject__wrapper">
+  <h2 style="margin-top: 0">Предмети</h2>
+  <form [formGroup]="form" (ngSubmit)="createSubject()" style="display: flex; align-items: center">
+    <mat-form-field style="flex: 1;">
+      <input matInput formControlName="subjectName" type="text" autocomplete="off">
+      <mat-hint>Введіть назву предмету і натисніть на кнопку</mat-hint>
+      <mat-label>Додати новий предмет</mat-label>
+      <mat-error *ngIf="isFieldInvalid('subjectName')">
+        Потібно вказати назву предмету
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button color="accent">Додати</button>
+    </div>
+  </form>
+  <h2>Існуючі предмети</h2>
+  <ul class="current__subject__list">
+    <li *ngFor="let subject of subjects">
+      {{ subject.name }}
+      <mat-icon class="list__item__icon" (click)="deleteSubject($event, subject)">delete</mat-icon>
+    </li>
+  </ul>
+</div>

@@ -14,8 +14,8 @@ export class DataSourceService {
   constructor(private http: HttpClient) {
   }
 
-  getAllSubject(): Observable<Object> {
-    return this.http.get(
+  getAllSubject(): Observable<Array<{k: string; name: string}>> {
+    return this.http.get<Array<{k: string; name: string}>>(
       `${environment.BASE_URL}/all_subject.php`
     );
   }
@@ -96,5 +96,14 @@ export class DataSourceService {
     formData.append('login', login);
     formData.append('password', password);
     return this.http.post<{auth_token: string}>(`${environment.BASE_URL}/get_user_token.php`, formData);
+  }
+
+  createSubject(subject: Subject): Observable<{k: string, name: string}> {
+    const formData: FormData = new FormData();
+    formData.append('subject_name', subject.name);
+    return this.http.post<{k: string, name: string}>(
+      `${environment.BASE_URL}/create_subject.php`,
+      formData
+    );
   }
 }

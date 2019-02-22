@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {
   MatAutocompleteModule,
   MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
   MatDividerModule,
@@ -36,6 +37,10 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from './components/pages/login/login.component';
 import {MainContainerComponent} from './components/pages/main-container/main-container.component';
 import {HttpErrorInterceptor} from './components/shared/interceptors/error-interceptor.service';
+import {SettingsComponent} from './components/pages/settings/settings.component';
+import {SubjectsComponent} from './components/pages/settings/subjects/subjects.component';
+import {ProfileComponent} from './components/pages/settings/profile/profile.component';
+import {SecureComponent} from './components/pages/settings/secure/secure.component';
 
 
 @NgModule({
@@ -55,7 +60,11 @@ import {HttpErrorInterceptor} from './components/shared/interceptors/error-inter
     MiniButtonComponent,
     StatisticsItemComponent,
     LoginComponent,
-    MainContainerComponent
+    MainContainerComponent,
+    SettingsComponent,
+    SubjectsComponent,
+    ProfileComponent,
+    SecureComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +83,7 @@ import {HttpErrorInterceptor} from './components/shared/interceptors/error-inter
     MatSnackBarModule,
     MatPaginatorModule,
     ReactiveFormsModule,
+    MatButtonToggleModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },

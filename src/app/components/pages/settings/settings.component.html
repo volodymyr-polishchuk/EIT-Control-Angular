@@ -1,0 +1,19 @@
+<div class="main__wrapper">
+  <div class="main__container">
+    <div class="card" style="flex: 3; min-width: 250px">
+      <mat-card>
+        <mat-button-toggle-group vertical style="width: 100%">
+          <mat-button-toggle routerLink="profile">Профіль</mat-button-toggle>
+          <mat-button-toggle routerLink="subjects">Предмети</mat-button-toggle>
+          <mat-button-toggle routerLink="secure">Безпека</mat-button-toggle>
+          <mat-button-toggle>Вихід</mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-card>
+    </div>
+
+    <mat-card class="card" style="flex: 5; min-width: 250px">
+      <router-outlet></router-outlet>
+    </mat-card>
+  </div>
+</div>
+
