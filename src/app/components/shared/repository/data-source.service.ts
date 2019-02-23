@@ -92,11 +92,11 @@ export class DataSourceService {
     return this.http.get<{efficiency: number}>(`${environment.BASE_URL}/get_efficiency.php`);
   }
 
-  login(login: string, password: string): Observable<{auth_token: string}> {
+  login(login: string, password: string): Observable<{auth_token: string, auth_k: string}> {
     const formData = new FormData();
     formData.append('login', login);
     formData.append('password', password);
-    return this.http.post<{auth_token: string}>(`${environment.BASE_URL}/get_user_token.php`, formData);
+    return this.http.post<{auth_token: string, auth_k: string}>(`${environment.BASE_URL}/get_user_token.php`, formData);
   }
 
   createSubject(subject: Subject): Observable<{k: string, name: string}> {
@@ -117,6 +117,16 @@ export class DataSourceService {
   getUserInfo(): Observable<User> {
     return this.http.get<User>(
       `${environment.BASE_URL}/get_user_info.php`
+    );
+  }
+
+  changePassword(oldPassword: string, newPassword: string): Observable<{message: string}> {
+    const formData: FormData = new FormData();
+    formData.append('old_password', oldPassword);
+    formData.append('new_password', newPassword);
+    return this.http.post<{message: string}>(
+      `${environment.BASE_URL}/change_password.php`,
+      formData
     );
   }
 }

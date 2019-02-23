@@ -12,8 +12,8 @@ if (isset(getallheaders()['Authorization'])) {
     die('Authorization header not set or authorization type not bearer');
   }
 
+  $id = getallheaders()['Identify'];
   $token = $authorization[1];
-  $id = '1';
 
   $query = "SELECT k, login, 'name', description, role, password_hash  
               FROM users_eit 

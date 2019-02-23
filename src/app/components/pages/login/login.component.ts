@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
       this.dataSource.login(this.form.value.login, this.form.value.password)
         .subscribe(value => {
           localStorage.setItem('token', value.auth_token);
+          localStorage.setItem('id', value.auth_k);
           this.router.navigate(['/student/lessons']).catch(console.log);
         });
     }

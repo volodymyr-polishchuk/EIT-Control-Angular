@@ -1,2 +1,31 @@
 <h2 style="margin-top: 0">Безпека</h2>
 <div><mat-divider></mat-divider></div>
+<form [formGroup]="form" (ngSubmit)="changePassword()" style="display: flex; flex-direction: column">
+  <mat-form-field>
+    <input matInput formControlName="oldPassword" required maxlength="16" type="password">
+    <mat-label>Старий пароль</mat-label>
+    <mat-hint>Введіть пароль, що використали для входу</mat-hint>
+    <mat-error *ngIf="isFieldInvalid('oldPassword')">
+      Пероль введено не вірно
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="newPassword" required maxlength="16" type="password">
+    <mat-label>Новий пароль</mat-label>
+    <mat-hint>Використовуйте складний пароль</mat-hint>
+    <mat-error *ngIf="isFieldInvalid('newPassword')">
+      Новий пароль не досить складний
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="confirmPassword" required maxlength="16" type="password">
+    <mat-label>Підтвердіть пароль</mat-label>
+    <mat-hint>Введіть повторно пароль</mat-hint>
+    <mat-error *ngIf="isFieldInvalid('confirmPassword')">
+      Паролі не співпадають
+    </mat-error>
+  </mat-form-field>
+  <div style="margin-left: auto">
+    <button mat-raised-button color="accent">Змінити</button>
+  </div>
+</form>
