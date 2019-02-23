@@ -17,9 +17,13 @@ export class ProfileComponent implements OnInit {
   constructor(private dataSource: DataSourceService) { }
 
   ngOnInit() {
+    if (localStorage.getItem('userInfo')) {
+      this.user = JSON.parse(localStorage.getItem('userInfo'));
+    }
     this.dataSource.getUserInfo()
       .subscribe(value => {
         this.user = value;
+        localStorage.setItem('userInfo', JSON.stringify(this.user));
       });
   }
 
