@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Lesson} from '../../shared/models/lesson';
 import {Subject} from '../../shared/models/subject';
 import {InMemoryDataSourceService} from '../../shared/repository/in-memory-data-source.service';
@@ -26,7 +26,6 @@ export class LessonsComponent implements OnInit {
         this.subjectsForHint = value.map<Subject>(item => ({key: '-1', name: item.subjectName}));
         this.subjectForHintLoad = true;
       });
-    this.subjectsForHint = this.memoryDataSource.getAllSubject();
     this.updateActiveLessonsList();
   }
 

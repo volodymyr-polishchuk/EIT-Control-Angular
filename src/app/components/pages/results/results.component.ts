@@ -30,9 +30,12 @@ export class ResultsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.subjects = JSON.parse(localStorage.getItem('subjects'));
+    this.subjects.unshift({key: '0', name: 'Всі предмети'});
     this.dataSource.getAllSubject().subscribe(
       (next: Array<{k: string; name: string}>) => {
         this.subjects = next.map((item) => ({key: item.k, name: item.name}));
+        localStorage.setItem('subjects', JSON.stringify(this.subjects));
         this.subjects.unshift({key: '0', name: 'Всі предмети'});
       });
   }

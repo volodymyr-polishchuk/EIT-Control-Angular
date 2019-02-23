@@ -26,9 +26,11 @@ export class CreateLessonComponent implements OnInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.subjects = JSON.parse(localStorage.getItem('subjects'));
     this.dataSource.getAllSubject().subscribe(
       (next: Array<{k: string; name: string}>) => {
         this.subjects = next.map((item) => ({key: item.k, name: item.name}));
+        localStorage.setItem('subjects', JSON.stringify(this.subjects));
         if (this.subjects) {
           this.refreshTopicsList(this.subjects[0].key);
         }
