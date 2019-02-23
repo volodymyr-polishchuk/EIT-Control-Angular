@@ -6,6 +6,7 @@ $subject = $_GET['subject'];
 $group = $_GET['group'];
 $from_date = $_GET['from_date'];
 $to_date = $_GET['to_date'];
+$user = $user_information['k'];
 validateData($subject, $group, $from_date, $to_date);
 
 if ($subject == 0) {
@@ -45,6 +46,7 @@ $sql_query = "SELECT subject.name AS subjectName,
                      INNER JOIN subject ON subject.k = lessons.subject 
                      INNER JOIN theme ON theme.k = lessons.theme 
                WHERE lessons.subject LIKE '$subject' 
+                     AND subject.user LIKE '$user'
                      AND lessons.active LIKE '0' 
                      AND $from_date_piece 
                      AND $to_date_piece 

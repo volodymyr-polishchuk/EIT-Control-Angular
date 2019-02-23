@@ -3,6 +3,7 @@ include 'cors.php';
 include 'auth.php';
 require_once('connect.php');
 $connection = EIT_DAO::getConnection();
+$user = $user_information['k'];
 $query = '
 SELECT s.name AS subject_name,
        s.sum_seconds AS seconds,
@@ -11,11 +12,15 @@ SELECT s.name AS subject_name,
                SUM(UNIX_TIMESTAMP(date_end) - UNIX_TIMESTAMP(date_start)) AS sum_seconds
           FROM lessons
                INNER JOIN subject ON subject.k = lessons.subject
+         WHERE lessons.user LIKE ?
          GROUP BY lessons.subject) AS s
  ORDER BY seconds DESC
 ';
-$arr = array();
-foreach ($connection->query($query) as $row) {
-    array_push($arr, $row);
+
+$statement = $connection->prepare($query);
+$statement->bindParam(1, $user, PDO::PARAM_STR);
+if ($statement->execute()) {
+  echo json_encode($statement->fetchAll(PDO::FETCH_ASSOC));
+} else {
+  die(json_encode($statement->errorInfo()));
 }
-echo json_encode($arr);

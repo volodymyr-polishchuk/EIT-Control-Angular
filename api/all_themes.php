@@ -12,7 +12,7 @@ $query = "SELECT theme.k,
                  theme.name 
             FROM theme 
            WHERE theme.subject LIKE ? 
-                 AND theme.user = $user
+                 AND theme.user LIKE $user
            ORDER BY theme.name";
 $sth = $connection->prepare($query);
 $sth->execute(array($code));
