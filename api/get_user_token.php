@@ -9,7 +9,7 @@ $connection = EIT_DAO::getConnection();
 $query = "SELECT password_hash, k 
             FROM users_eit 
            WHERE login LIKE ? 
-                 AND password LIKE ?;";
+                 AND password_hash LIKE SHA2(?, 512);";
 
 $sth = $connection->prepare($query);
 $sth->execute(array($login, $password));

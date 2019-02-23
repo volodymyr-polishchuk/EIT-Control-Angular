@@ -24,13 +24,13 @@ if ($verifyPasswordStatement->execute() && $verifyPasswordStatement->fetch(PDO::
   $changePasswordQuery = "
     UPDATE users_eit
        SET password_hash = SHA2(?, 512)
-     WHERE k = ?
+     WHERE k LIKE ?
   ";
 
   $changePasswordStatement = $connection->prepare($changePasswordQuery);
   $changePasswordStatement->bindParam(1, $new_password, PDO::PARAM_STR);
   $changePasswordStatement->bindParam(2, $user, PDO::PARAM_STR);
-  if ($changePasswordStatement->execute() && $changePasswordStatement->rowCount() > 0) {
+  if ($changePasswordStatement->execute()) {
     die(json_encode(array('message' => 'Пароль змінено успішно')));
   } else {
     http_response_code(500);

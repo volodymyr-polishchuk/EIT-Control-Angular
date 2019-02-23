@@ -42,6 +42,7 @@ export class SecureComponent implements OnInit {
     this.dataSource.changePassword(oldPassword, newPassword)
       .subscribe(value => {
         this.snackBar.open(value.message, 'Закрити', { duration: 3000 });
+        this.formSubmitAttempt = false;
         this.form.reset();
       }, error => {
         this.snackBar.open('Пароль уведено не вірно', 'Закрити', { duration: 3000 });
