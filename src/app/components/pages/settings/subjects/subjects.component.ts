@@ -51,8 +51,13 @@ export class SubjectsComponent implements OnInit {
   deleteSubject(event: any, subject: Subject): void {
     const message = `Ви точно бажаєте видалити предмет [${subject.name}]?`;
     if (confirm(message)) {
-      this.subjects = this.subjects.filter(item => item !== subject);
-      alert('Майже видаляно');
+      this.dataSource.deleteSubject(subject)
+        .subscribe(value => {
+          this.subjects = this.subjects.filter(item => item !== subject);
+          this.snackBar.open(value.message, 'Закрити', { duration: 3000 });
+        }, error => {
+          this.snackBar.open('Не можливо видалити. За цим предметом уже існують теми або заняття', 'Закрити', { duration: 2000 });
+        });
     }
   }
 }

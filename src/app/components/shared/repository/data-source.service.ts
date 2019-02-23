@@ -106,4 +106,10 @@ export class DataSourceService {
       formData
     );
   }
+
+  deleteSubject(subject: Subject): Observable<{message: string}> {
+    const formData: FormData = new FormData();
+    formData.append('subject_k', subject.key);
+    return this.http.post<{message: string}>(`${environment.BASE_URL}/delete_subject.php`, formData);
+  }
 }

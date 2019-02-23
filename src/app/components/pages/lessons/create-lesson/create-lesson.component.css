@@ -37,3 +37,7 @@
 .topic__option__delete__button__wrapper:hover {
   opacity: 1;
 }
+
+.topic__option__delete__button__wrapper:focus {
+  opacity: 1;
+}
