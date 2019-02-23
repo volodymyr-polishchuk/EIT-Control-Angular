@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {DataSourceService} from '../../../shared/repository/data-source.service';
+import {User} from '../../../shared/models/user';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,18 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  user: User = {
+    name: '',
+    login: '',
+    description: ''
+  };
+  constructor(private dataSource: DataSourceService) { }
 
   ngOnInit() {
+    this.dataSource.getUserInfo()
+      .subscribe(value => {
+        this.user = value;
+      });
   }
 
 }

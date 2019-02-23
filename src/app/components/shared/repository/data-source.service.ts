@@ -5,6 +5,7 @@ import {environment} from '../../../../environments/environment';
 import {Subject} from '../models/subject';
 import {Topic} from '../models/topic';
 import {Lesson} from '../models/lesson';
+import {User} from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -111,5 +112,11 @@ export class DataSourceService {
     const formData: FormData = new FormData();
     formData.append('subject_k', subject.key);
     return this.http.post<{message: string}>(`${environment.BASE_URL}/delete_subject.php`, formData);
+  }
+
+  getUserInfo(): Observable<User> {
+    return this.http.get<User>(
+      `${environment.BASE_URL}/get_user_info.php`
+    );
   }
 }

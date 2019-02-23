@@ -3,8 +3,7 @@ include 'cors.php';
 include "auth.php";
 require_once "connect.php";
 
-$auth_token = $_COOKIE['auth-token'];
-$auth_k = $_COOKIE['auth-k'];
+$user = $user_information['k'];
 
 $PDO = EIT_DAO::getConnection();
 $query = "SELECT login, 
@@ -12,10 +11,9 @@ $query = "SELECT login,
                  description 
             FROM users_eit 
            WHERE k LIKE ? 
-                 AND password_hash LIKE ? 
            LIMIT 1;";
 $statement = $PDO->prepare($query);
-if (!$statement->execute(array($auth_k, $auth_token))) {
+if (!$statement->execute(array($user))) {
     die($statement->errorInfo());
 }
 if ($statement->rowCount() == 0) {
