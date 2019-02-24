@@ -41,6 +41,7 @@ import {SettingsComponent} from './components/pages/settings/settings.component'
 import {SubjectsComponent} from './components/pages/settings/subjects/subjects.component';
 import {ProfileComponent} from './components/pages/settings/profile/profile.component';
 import {SecureComponent} from './components/pages/settings/secure/secure.component';
+import {GraphComponent} from './components/pages/statistics/graph/graph.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import {SecureComponent} from './components/pages/settings/secure/secure.compone
     SettingsComponent,
     SubjectsComponent,
     ProfileComponent,
-    SecureComponent
+    SecureComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,

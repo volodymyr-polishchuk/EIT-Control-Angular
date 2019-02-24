@@ -129,4 +129,10 @@ export class DataSourceService {
       formData
     );
   }
+
+  getStatisticsForDays(): Observable<Array<{day_result: number, date: Date}>> {
+    return this.http.get<Array<{day_result: number, date: Date}>>(
+      `${environment.BASE_URL}/get_statistics_for_days.php`
+    );
+  }
 }

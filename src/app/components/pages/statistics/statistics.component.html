@@ -1,29 +1,32 @@
 <div class="main__wrapper">
   <div class="main__container">
-    <mat-card class="card">
-      <mat-card-title style="display: flex; justify-content: space-between; max-width: 250px">
-        Статистика
-        <div style="display: flex; flex-direction: column; text-align: center">
-          <span style="font-size: 11px">поточний тиждень</span>
-          <span style="font-size: 11px">{{ efficiency.toFixed(2) }}%</span>
-        </div>
-      </mat-card-title>
-      <mat-card-content class="statistics__items">
-        <app-statistics-item
-          *ngFor="let statisticsItem of statistics"
-          [formattedTime]="statisticsItem.formatted_time"
-          [subjectName]="statisticsItem.subject_name">
-        </app-statistics-item>
-      </mat-card-content>
-      <mat-card-actions class="statistics__bottom">
-        <div>
-          <mat-divider></mat-divider>
+    <div class="card" style="flex: 3;">
+      <mat-card>
+        <mat-card-title style="display: flex; justify-content: space-between; max-width: 250px">
+          Статистика
+          <div style="display: flex; flex-direction: column; text-align: center">
+            <span style="font-size: 11px">поточний тиждень</span>
+            <span style="font-size: 11px">{{ efficiency.toFixed(2) }}%</span>
+          </div>
+        </mat-card-title>
+        <mat-card-content class="statistics__items">
           <app-statistics-item
-            [subjectName]="'Всього:'"
-            [formattedTime]="getTimeSumFormatted()">
+            *ngFor="let statisticsItem of statistics"
+            [formattedTime]="statisticsItem.formatted_time"
+            [subjectName]="statisticsItem.subject_name">
           </app-statistics-item>
-        </div>
-      </mat-card-actions>
-    </mat-card>
+        </mat-card-content>
+        <mat-card-actions class="statistics__bottom">
+          <div>
+            <mat-divider></mat-divider>
+            <app-statistics-item
+              [subjectName]="'Всього:'"
+              [formattedTime]="getTimeSumFormatted()">
+            </app-statistics-item>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <app-graph class="card" style="flex: 5"></app-graph>
   </div>
 </div>

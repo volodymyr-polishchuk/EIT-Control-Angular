@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-title>
+    Діаграма
+  </mat-card-title>
+  <mat-card-content class="statistics__items">
+    <div style="width: 100%;" id="canvas_wrapper" (window:resize)="resizeCanvas($event)">
+      <canvas id="graph_canvas" width="250" height="250"></canvas>
+    </div>
+  </mat-card-content>
+</mat-card>
