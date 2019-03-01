@@ -7,48 +7,80 @@ import {DataSourceService} from '../../../shared/repository/data-source.service'
   styleUrls: ['./graph.component.css']
 })
 export class GraphComponent implements OnInit {
+  constructor(private dataSource: DataSourceService) { }
 
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
   canvasWrapper: HTMLDivElement;
   canvasWidth: number;
   canvasHeight: number;
-  data = [
-    {
-      date: new Date(2019, 2, 20),
-      value: 1000
-    },
-    {
-      date: new Date(2019, 2, 21),
-      value: 2000
-    },
-    {
-      date: new Date(2019, 2, 22),
-      value: 1500
-    },
-    {
-      date: new Date(2019, 2, 23),
-      value: 500
-    },
-    {
-      date: new Date(2019, 2, 23),
-      value: 2000
-    },
-    {
-      date: new Date(2019, 2, 23),
-      value: 1700
-    },
-    {
-      date: new Date(2019, 2, 23),
-      value: 2300
-    },
-  ];
-  constructor(private dataSource: DataSourceService) { }
+  data = [];
+
+  static getValueOrNull(index: number, array) {
+    if (index < array.length) {
+      return array[index];
+    } else {
+      return null;
+    }
+  }
+
+  static timeFormat(second: number): string {
+    return Math.floor(second / 60).toString(); // + ':' + ((second % 60) >= 10 ? (second % 60) : ('0' + (second % 60)));
+  }
+
+  static toTwoDigit(value: number): string {
+    return value >= 10 ? value.toString() : '0' + value;
+  }
+
+  static getDayAndMonth(date: Date): string {
+    return GraphComponent.toTwoDigit(date.getDate()) + '/' + GraphComponent.toTwoDigit(date.getMonth() + 1);
+  }
+
+  static drawBigText(line: string, x: number, y: number, ctx: CanvasRenderingContext2D) {
+    const oldFillStyle = ctx.fillStyle;
+    ctx.fillStyle = 'rgb(0, 0, 0)';
+    GraphComponent.drawText(line, x, y, ctx);
+    ctx.fillStyle = oldFillStyle;
+  }
+
+  static drawText(line: string, x: number, y: number, ctx: CanvasRenderingContext2D) {
+    ctx.translate(0, ctx.canvas.height);
+    ctx.scale(1, -1);
+    ctx.fillText(line, x, ctx.canvas.height - y);
+    ctx.scale(1, -1);
+    ctx.translate(0, -ctx.canvas.height);
+  }
+
+  static addMissedData(inData: Array<{ date: Date, value: number }>): Array<{ date: Date, value: number }> {
+    const data = inData.slice();
+
+    const maxDate = data.reduce<Date>((previousValue, currentValue) => {
+      return previousValue > currentValue.date ? previousValue : currentValue.date;
+    }, new Date(data[0].date));
+
+    const minDate = data.reduce<Date>((previousValue, currentValue) => {
+      return previousValue < currentValue.date ? previousValue : currentValue.date;
+    }, new Date(data[0].date));
+
+    for (const i = new Date(minDate); i < maxDate; i.setDate(i.getDate() + 1)) {
+      const result = data.filter(value1 => {
+        return value1.date.getDate() === i.getDate()
+          && value1.date.getMonth() === i.getMonth()
+          && value1.date.getFullYear() === i.getFullYear();
+      });
+      if (result.length === 0) {
+        data.push({date: new Date(i), value: 0});
+      }
+    }
+    data.sort((a, b) => a.date === b.date ? 0 : (a.date > b.date ? 1 : -1));
+    return data;
+  }
 
   ngOnInit() {
     this.dataSource.getStatisticsForDays()
       .subscribe(value => {
         this.data = value.map(item => ({date: new Date(item.date), value: item.day_result}));
+        this.data = GraphComponent.addMissedData(this.data);
         this.setupCanvas();
       });
   }
@@ -96,87 +128,49 @@ export class GraphComponent implements OnInit {
 
     ctx.beginPath();
     const yfr = 5;
-    ctx.moveTo(0, 0);
     for (let i = 1; i < yfr; i++) {
       ctx.moveTo(0, this.canvasHeight * (i / yfr));
-      ctx.lineTo(10, this.canvasHeight * (i / yfr));
       ctx.lineTo(this.canvasWidth, this.canvasHeight * (i / yfr));
-      // this.drawText(Math.floor(highestValue * (i / yfr)).toString(), 0, this.canvasHeight * (i / yfr) + 4, ctx);
     }
     ctx.stroke();
 
     ctx.beginPath();
     ctx.setLineDash([5, 15]);
-    const xfr = this.data.length;
-    ctx.moveTo(0, 0);
-    for (let i = 0; i < xfr; i++) {
-      ctx.moveTo(i * fr, 0);
-      ctx.lineTo(i * fr, this.canvasHeight);
-      this.drawText(this.getDayAndMonth(this.data[i].date), this.canvasWidth * (i / xfr) + 4, 0, ctx);
-    }
+    this.data.forEach((value, index) => {
+      ctx.moveTo(index * fr, 0);
+      ctx.lineTo(index * fr, this.canvasHeight);
+      GraphComponent.drawText(GraphComponent.getDayAndMonth(value.date), index * fr + 2, 0, ctx);
+    });
     ctx.stroke();
 
     ctx.beginPath();
     ctx.setLineDash([]);
     ctx.lineWidth = 3;
+    const oldFont = ctx.font;
     ctx.font = '12px Arial';
-    for (let i = 0; i < this.data.length; i++) {
-      const rValue = (this.data[i].value / highestValue);
-      const xp = i * fr;
-      const yp = this.canvasHeight * rValue;
-      ctx.lineTo(xp, yp);
-    }
+    this.data.forEach((value, index) => {
+      const rValue = (value.value / highestValue);
+      ctx.lineTo(index * fr, this.canvasHeight * rValue);
+    });
     ctx.stroke();
+
     for (let i = 0; i < this.data.length; i++) {
-      const rValue = (this.data[i].value / highestValue);
+      const current = this.data[i];
+      const rValue = (current.value / highestValue);
       const xp = i * fr;
       const yp = this.canvasHeight * rValue;
-      const timeLine = this.timeFormat(this.data[i].value);
-      ctx.fillStyle = 'rgb(255, 255, 255)';
+      const timeLine = GraphComponent.timeFormat(this.data[i].value);
+      const next = GraphComponent.getValueOrNull(i + 1, this.data);
 
-      if (this.getValueOrNull(i + 1, this.data) && this.getValueOrNull(i + 1, this.data).value > this.data[i].value) {
+      if (next && Number(next.value) > Number(current.value)) {
         ctx.fillRect(xp, yp - (12 + 4), ctx.measureText(timeLine).width + 8, 12 + 4);
-        const oldFillStyle = ctx.fillStyle;
-        ctx.fillStyle = 'rgb(0, 0, 0)';
-        this.drawText(timeLine, xp + 4, yp + 4 - 16, ctx);
-        ctx.fillStyle = oldFillStyle;
+        GraphComponent.drawBigText(timeLine, xp + 4, yp + 4 - 16, ctx);
       } else {
         ctx.fillRect(xp, yp, ctx.measureText(timeLine).width + 8, 12 + 4);
-        const oldFillStyle = ctx.fillStyle;
-        ctx.fillStyle = 'rgb(0, 0, 0)';
-        this.drawText(timeLine, xp + 4, yp + 4, ctx);
-        ctx.fillStyle = oldFillStyle;
+        GraphComponent.drawBigText(timeLine, xp + 4, yp + 4, ctx);
       }
     }
     ctx.lineWidth = 1;
-    ctx.font = '11px';
-  }
-
-  getValueOrNull(index: number, array) {
-    if (index < array.length) {
-      return array[index];
-    } else {
-      return null;
-    }
-  }
-
-  timeFormat(second: number): string {
-    return Math.floor(second / 60) + ':' + ((second % 60) >= 10 ? (second % 60) : ('0' + (second % 60)));
-  }
-
-  getDayAndMonth(date: Date): string {
-    return this.toTwoDigit(date.getDate()) + '/' + this.toTwoDigit(date.getMonth() + 1);
-  }
-
-  toTwoDigit(value: number): string {
-    return value >= 10 ? value.toString() : '0' + value;
-  }
-
-  drawText(line: string, x: number, y: number, ctx: CanvasRenderingContext2D) {
-    this.context.translate(0, this.canvasHeight);
-    ctx.scale(1, -1);
-    ctx.fillText(line, x, this.canvasHeight - y);
-    ctx.scale(1, -1);
-    this.context.translate(0, -this.canvasHeight);
+    ctx.font = oldFont;
   }
 }
