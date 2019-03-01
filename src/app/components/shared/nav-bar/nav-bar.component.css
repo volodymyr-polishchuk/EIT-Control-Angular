@@ -28,6 +28,7 @@
 .mini__screen {
   display: inherit;
   flex-direction: inherit;
+  width: 100%;
 }
 
 @media all and (min-width: 800px) {
@@ -47,6 +48,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: auto;
+  padding-right: 16px;
 }
 
 .settings__link__button {
