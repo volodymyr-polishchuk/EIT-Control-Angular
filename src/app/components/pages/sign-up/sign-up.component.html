@@ -1,0 +1,54 @@
+<div class="login__wrapper">
+  <div class="login__container">
+    <mat-card
+      class="card"
+      style="flex: 1">
+      <mat-card-title>Реєстрація</mat-card-title>
+      <mat-card-content style="display: flex; flex-direction: column">
+        <form [formGroup]="form" (ngSubmit)="signUp()" style="display: flex; flex-direction: column">
+          <mat-form-field>
+            <input matInput placeholder="Ім'я" name="name" type="text" formControlName="name" required>
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-hint>Відображатиметься всім користувачам</mat-hint>
+            <mat-error *ngIf="isFieldInvalid('login')">
+              Поле не може бути пустим
+            </mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <input matInput placeholder="Логін" name="login" type="text" formControlName="login" required>
+            <mat-icon matSuffix>account_circle</mat-icon>
+            <mat-hint>Використовуватиметься для входу</mat-hint>
+            <mat-error *ngIf="isFieldInvalid('login')">
+              Поле не може бути пустим
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="E-mail" name="email" type="email" formControlName="email" required>
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-hint>Для відновлення паролю</mat-hint>
+            <mat-error *ngIf="isFieldInvalid('email')">
+              Уведіть дійсну електронну пошту
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Пароль" name="password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+            <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-hint>Встановлюйте складний пароль</mat-hint>
+            <mat-error *ngIf="isFieldInvalid('password')">
+              Пароль занадто простий
+            </mat-error>
+          </mat-form-field>
+
+          <div style="display: flex; justify-content: flex-end; margin-top: 8px">
+            <button mat-raised-button color="accent">Зареєструватися</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+

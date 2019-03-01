@@ -135,4 +135,13 @@ export class DataSourceService {
       `${environment.BASE_URL}/get_statistics_for_days.php`
     );
   }
+
+  signUp(name: string, email: string, login: string, password: string): Observable<{auth_token: string, auth_k: string}> {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('login', login);
+    formData.append('password', password);
+    return this.http.post<{auth_token: string, auth_k: string}>(`${environment.BASE_URL}/sign_up.php`, formData);
+  }
 }

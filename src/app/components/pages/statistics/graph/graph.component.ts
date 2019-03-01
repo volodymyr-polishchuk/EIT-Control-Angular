@@ -52,6 +52,9 @@ export class GraphComponent implements OnInit {
   }
 
   static addMissedData(inData: Array<{ date: Date, value: number }>): Array<{ date: Date, value: number }> {
+    if (inData.length === 0) {
+      return [];
+    }
     const data = inData.slice();
 
     const maxDate = data.reduce<Date>((previousValue, currentValue) => {

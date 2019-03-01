@@ -1,0 +1,19 @@
+.login__wrapper {
+  width: 100%;
+  height: calc(100vh - 20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__container {
+  max-width: 400px;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.card {
+  margin: 4px;
+}

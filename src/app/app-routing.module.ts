@@ -9,6 +9,7 @@ import {SettingsComponent} from './components/pages/settings/settings.component'
 import {SubjectsComponent} from './components/pages/settings/subjects/subjects.component';
 import {ProfileComponent} from './components/pages/settings/profile/profile.component';
 import {SecureComponent} from './components/pages/settings/secure/secure.component';
+import {SignUpComponent} from './components/pages/sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'student', pathMatch: 'full' },
@@ -33,6 +34,7 @@ const routes: Routes = [
     ]
   },
   { path: 'login', component: LoginComponent },
+  { path: 'sign-up', component: SignUpComponent },
 ];
 
 @NgModule({

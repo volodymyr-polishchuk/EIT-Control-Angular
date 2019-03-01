@@ -42,6 +42,7 @@ import {SubjectsComponent} from './components/pages/settings/subjects/subjects.c
 import {ProfileComponent} from './components/pages/settings/profile/profile.component';
 import {SecureComponent} from './components/pages/settings/secure/secure.component';
 import {GraphComponent} from './components/pages/statistics/graph/graph.component';
+import {SignUpComponent} from './components/pages/sign-up/sign-up.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import {GraphComponent} from './components/pages/statistics/graph/graph.componen
     SubjectsComponent,
     ProfileComponent,
     SecureComponent,
-    GraphComponent
+    GraphComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
