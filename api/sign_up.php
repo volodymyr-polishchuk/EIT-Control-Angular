@@ -16,7 +16,7 @@ $insertSubjectStatement = $connection->prepare($createSubjectQuery);
 $insertSubjectStatement->bindParam(1, $name, PDO::PARAM_STR);
 $insertSubjectStatement->bindParam(2, $email, PDO::PARAM_STR);
 $insertSubjectStatement->bindParam(3, $login, PDO::PARAM_STR);
-$insertSubjectStatement->bindParam(5, $password, PDO::PARAM_STR);
+$insertSubjectStatement->bindParam(4, $password, PDO::PARAM_STR);
 
 if ($insertSubjectStatement->execute()) {
   echo json_encode(array('k' => $connection->lastInsertId(), 'message' => 'successful'));
