@@ -60,7 +60,7 @@ export class LessonsComponent implements OnInit {
     this.dataSource.endLesson(lesson).subscribe((value: number) => {
       console.log(value);
       this.updateActiveLessonsList();
-      this.snackBar.open('Lesson save successful', 'Close', { duration: 1000 });
+      this.snackBar.open('Заняття успішно збережене', 'Закрити', { duration: 3000 });
     }, (error: string) => {
       console.log(error);
     });
@@ -71,7 +71,7 @@ export class LessonsComponent implements OnInit {
     this.dataSource.cancelLesson(lesson).subscribe((value: number) => {
       console.log(value);
       this.updateActiveLessonsList();
-      this.snackBar.open('Lesson delete successful', 'Close', { duration: 1000 });
+      this.snackBar.open('Заняття успішно видалене', 'Закрити', { duration: 3000 });
     });
   }
 
