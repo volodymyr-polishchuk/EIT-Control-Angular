@@ -105,16 +105,21 @@ export class GraphComponent implements OnInit {
   }
 
   resizeCanvas(event) {
-    this.canvas.style.width = 200 + 'px';
-    this.canvasWidth = this.canvasWrapper.offsetWidth;
-    this.canvas.style.width = this.canvasWidth + 'px';
+    try {
+      this.canvas.style.width = 200 + 'px';
+      this.canvasWidth = this.canvasWrapper.offsetWidth;
+      this.canvas.style.width = this.canvasWidth + 'px';
 
-    this.canvas.width = this.canvasWrapper.offsetWidth * 3;
+      this.canvas.width = this.canvasWrapper.offsetWidth * 3;
 
-    this.context.scale(3, -3);
-    this.context.translate(0, -this.canvasHeight);
-    this.context.clearRect(0, 0, this.context.canvas.height, this.context.canvas.width);
-    this.updateCanvas(this.context);
+      this.context.scale(3, -3);
+      this.context.translate(0, -this.canvasHeight);
+      this.context.clearRect(0, 0, this.context.canvas.height, this.context.canvas.width);
+      this.updateCanvas(this.context);
+    } catch (e) {
+      console.error(e);
+    }
+
   }
 
   updateCanvas(ctx: CanvasRenderingContext2D): void {
@@ -139,7 +144,15 @@ export class GraphComponent implements OnInit {
     this.data.forEach((value, index) => {
       ctx.moveTo(index * fr, 0);
       ctx.lineTo(index * fr, this.canvasHeight);
-      GraphComponent.drawText(GraphComponent.getDayAndMonth(value.date), index * fr + 2, 0, ctx);
+
+      const xTranslate = index * fr + 2 + 2;
+      const r = Math.cos(45 * Math.PI / 180);
+      ctx.translate(xTranslate, 0);
+      ctx.rotate(r);
+      GraphComponent.drawText(GraphComponent.getDayAndMonth(value.date), 0, 0, ctx);
+      ctx.rotate(-r);
+      ctx.translate(-xTranslate, 0);
+
     });
     ctx.stroke();
 
@@ -161,6 +174,10 @@ export class GraphComponent implements OnInit {
       const yp = this.canvasHeight * rValue;
       const timeLine = GraphComponent.timeFormat(this.data[i].value);
       const next = GraphComponent.getValueOrNull(i + 1, this.data);
+
+      if (Number(current.value) === 0) {
+        continue;
+      }
 
       if (next && Number(next.value) > Number(current.value)) {
         ctx.fillRect(xp, yp - (12 + 4), ctx.measureText(timeLine).width + 8, 12 + 4);
