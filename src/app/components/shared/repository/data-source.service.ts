@@ -17,44 +17,44 @@ export class DataSourceService {
 
   getAllSubject(): Observable<Array<{k: string; name: string}>> {
     return this.http.get<Array<{k: string; name: string}>>(
-      `${environment.BASE_URL}/all_subject.php`
+      `${environment.OLD_BASE_URL}/all_subject.php`
     );
   }
 
   getTopicsForSubject(key: string): Observable<Object> {
     const params = new HttpParams().set('subject_code', key);
     return this.http.get(
-      `${environment.BASE_URL}/all_themes.php`,
+      `${environment.OLD_BASE_URL}/all_themes.php`,
       { params: params }
     );
   }
 
   startLesson(subject: Subject, topic: Topic): Observable<Object> {
-    const formData: FormData = new FormData();
-    formData.append('subject', subject.key);
-    formData.append('theme', topic.name);
     return this.http.post(
-      `${environment.BASE_URL}/start_lesson.php`,
-      formData
+      `${environment.OLD_BASE_URL}/start_lesson.php`,
+      {
+        subject: subject.key,
+        theme: topic.name,
+      }
       );
   }
 
   getActiveLessons(): Observable<Object> {
     return this.http.get(
-      `${environment.BASE_URL}/all_lessons.php`,
+      `${environment.OLD_BASE_URL}/all_lessons.php`,
     );
   }
 
   cancelLesson(lesson: Lesson): Observable<Object> {
-    const formData: FormData = new FormData();
-    formData.append('lesson_id', lesson.id);
-    return this.http.post(`${environment.BASE_URL}/cancel_lesson.php`, formData);
+    return this.http.post(`${environment.OLD_BASE_URL}/cancel_lesson.php`, {
+      lesson_id: lesson.id,
+    });
   }
 
   endLesson(lesson: Lesson): Observable<Object> {
-    const formData: FormData = new FormData();
-    formData.append('lesson_id', lesson.id);
-    return this.http.post(`${environment.BASE_URL}/success_lesson.php`, formData);
+    return this.http.post(`${environment.OLD_BASE_URL}/success_lesson.php`, {
+      lesson_id: lesson.id,
+    });
   }
 
   getHistory(subjectKey: string, group: string, fromDate: string, toDate: string): Observable<Object> {
@@ -63,7 +63,7 @@ export class DataSourceService {
     params.append('group', group);
     params.append('from_date', fromDate);
     params.append('to_date', toDate);
-    return this.http.get(`${environment.BASE_URL}/get_history.php`, {
+    return this.http.get(`${environment.OLD_BASE_URL}/get_history.php`, {
       params: {
         subject: subjectKey,
         group: group,
@@ -73,75 +73,71 @@ export class DataSourceService {
   }
 
   getSubjectThatNotLearnYesterday(): Observable<Array<{subjectName: string}>> {
-    return this.http.get<Array<{subjectName: string}>>(`${environment.BASE_URL}/get_subject_that_not_learn_yesterday.php`);
+    return this.http.get<Array<{subjectName: string}>>(`${environment.OLD_BASE_URL}/get_subject_that_not_learn_yesterday.php`);
   }
 
   getStatistics(): Observable<Array<{formatted_time: string, seconds: number, subject_name: string}>> {
     return this.http.get<Array<{formatted_time: string, seconds: number, subject_name: string}>>(
-      `${environment.BASE_URL}/get_statistics.php`
+      `${environment.OLD_BASE_URL}/get_statistics.php`
     );
   }
 
   deleteTopic(topic: Topic): Observable<Object> {
-    const formData: FormData = new FormData();
-    formData.append('topic_id', topic.key);
-    return this.http.post(`${environment.BASE_URL}/delete_topic.php`, formData);
+    return this.http.post(`${environment.OLD_BASE_URL}/delete_topic.php`, {
+      topic_id: topic.key,
+    });
   }
 
   getEfficiency(): Observable<{efficiency: number}> {
-    return this.http.get<{efficiency: number}>(`${environment.BASE_URL}/get_efficiency.php`);
+    return this.http.get<{efficiency: number}>(`${environment.OLD_BASE_URL}/get_efficiency.php`);
   }
 
   login(login: string, password: string): Observable<{auth_token: string, auth_k: string}> {
-    const formData = new FormData();
-    formData.append('login', login);
-    formData.append('password', password);
-    return this.http.post<{auth_token: string, auth_k: string}>(`${environment.BASE_URL}/get_user_token.php`, formData);
+    return this.http.post<{auth_token: string, auth_k: string}>(`${environment.OLD_BASE_URL}/get_user_token.php`, {
+      login, password,
+    });
   }
 
   createSubject(subject: Subject): Observable<{k: string, name: string}> {
-    const formData: FormData = new FormData();
-    formData.append('subject_name', subject.name);
     return this.http.post<{k: string, name: string}>(
-      `${environment.BASE_URL}/create_subject.php`,
-      formData
+      `${environment.OLD_BASE_URL}/create_subject.php`,
+      {
+        subject_name: subject.name,
+      }
     );
   }
 
   deleteSubject(subject: Subject): Observable<{message: string}> {
-    const formData: FormData = new FormData();
-    formData.append('subject_k', subject.key);
-    return this.http.post<{message: string}>(`${environment.BASE_URL}/delete_subject.php`, formData);
+    return this.http.post<{message: string}>(`${environment.OLD_BASE_URL}/delete_subject.php`, {
+      subject_k: subject.key,
+    });
   }
 
   getUserInfo(): Observable<User> {
     return this.http.get<User>(
-      `${environment.BASE_URL}/get_user_info.php`
+      `${environment.OLD_BASE_URL}/get_user_info.php`
     );
   }
 
   changePassword(oldPassword: string, newPassword: string): Observable<{message: string}> {
-    const formData: FormData = new FormData();
-    formData.append('old_password', oldPassword);
-    formData.append('new_password', newPassword);
     return this.http.post<{message: string}>(
-      `${environment.BASE_URL}/change_password.php`,
-      formData
+      `${environment.OLD_BASE_URL}/change_password.php`,
+      {
+        old_password: oldPassword,
+        new_password: newPassword,
+      }
     );
   }
 
   getStatisticsForDays(): Observable<Array<{day_result: number, date: Date}>> {
     return this.http.get<Array<{day_result: number, date: Date}>>(
-      `${environment.BASE_URL}/get_statistics_for_days.php`
+      `${environment.OLD_BASE_URL}/get_statistics_for_days.php`
     );
   }
 
   signUp(name: string, email: string, login: string, password: string): Observable<{auth_token: string, auth_k: string}> {
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('login', login);
-    formData.append('password', password);
-    return this.http.post<{auth_token: string, auth_k: string}>(`${environment.BASE_URL}/sign_up.php`, formData);
+    return this.http.post<{auth_token: string, auth_k: string}>(`${environment.OLD_BASE_URL}/sign_up.php`, {
+      name, email, login, password,
+    });
   }
 }

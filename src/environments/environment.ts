@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  BASE_URL: 'http://eit.hwork.net/api'
+  OLD_BASE_URL: 'http://localhost:8080/v1',
+  BASE_URL: 'http://localhost:8080',
 };
 
 /*

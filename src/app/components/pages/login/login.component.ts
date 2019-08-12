@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DataSourceService} from '../../shared/repository/data-source.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../../shared/repository/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,9 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   hide = true;
   private formSubmitAttempt: boolean;
-  constructor(private fb: FormBuilder, private dataSource: DataSourceService, private router: Router) { }
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -31,11 +33,12 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.form.valid) {
-      this.dataSource.login(this.form.value.login, this.form.value.password)
-        .subscribe(value => {
-          localStorage.setItem('token', value.auth_token);
-          localStorage.setItem('id', value.auth_k);
+      this.auth.login(this.form.value.login, this.form.value.password)
+        .subscribe((token) => {
+          this.auth.updateToken(token);
           this.router.navigate(['/student/lessons']).catch(console.log);
+        }, error => {
+          alert(JSON.stringify(error));
         });
     }
     this.formSubmitAttempt = true;

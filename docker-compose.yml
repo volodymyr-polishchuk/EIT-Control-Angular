@@ -1,0 +1,16 @@
+version: '3'
+services:
+  my_db:
+    image: 'mysql:5.7'
+    restart: on-failure
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3309:3306'
+    expose:
+      - '3306'
+    volumes:
+      - /Users/polishchuk/Downloads/hworknet_test2.sql:/usr/dump.sql
